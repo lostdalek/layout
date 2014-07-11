@@ -43,6 +43,8 @@
 		* compositing. The default setting ('auto') will mark controls for compositing
 		* if the platform supports it.
 		*
+		* @type {String|Boolean}
+		* @default 'auto'
 		* @protected
 		*/
 		accelerated: 'auto',
@@ -51,6 +53,8 @@
 		* Property of the drag event, used to calculate the amount that a drag will
 		* move the layout
 		*
+		* @type {String}
+		* @default 'ddx'
 		* @private
 		*/
 		dragProp: 'ddx',
@@ -58,6 +62,8 @@
 		/**
 		* Property of the drag event, used to calculate the direction of the drag
 		*
+		* @type {String}
+		* @default 'xDirection'
 		* @private
 		*/
 		dragDirectionProp: 'xDirection',
@@ -65,6 +71,8 @@
 		/**
 		* Property of the drag event, used to calculate whether a drag should occur
 		*
+		* @type {String}
+		* @default 'horizontal'
 		* @private
 		*/
 		canDragProp: 'horizontal',
@@ -74,6 +82,8 @@
 		* through the intermediate arrangements. This is useful when direct
 		* transitions between arrangements would be visually jarring.
 		*
+		* @type {Boolean}
+		* @default false
 		* @protected
 		*/
 		incrementalPoints: false,
@@ -131,7 +141,7 @@
 		* array may be set on the container to dictate the named arrangments
 		* between which the transition occurs.
 		*
-		* @private
+		* @protected
 		*/
 		start: function () {
 			var f = this.container.fromIndex, t = this.container.toIndex;
@@ -148,6 +158,7 @@
 			}
 			p$.push(this.container.toIndex);
 		},
+
 		/**
 		* Called when a layout transition completes. Implement this method to
 		* perform tasks that should only occur when a transition ends; for
