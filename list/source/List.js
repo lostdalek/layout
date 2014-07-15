@@ -1302,7 +1302,7 @@
 		* Clears the selection state for the given row index.
 		*
 		* Modifying selection will not automatically re-render the row, so use
-		* `[renderRow()]{@link enyo.List#renderRow}` or `[refresh()]{@link enyo.List#refresh}` to`
+		* `[renderRow()]{@link enyo.List#renderRow}` or `[refresh()]{@link enyo.List#refresh}` to
 		* update the view.
 		*
 		* @param {Number} index - Index of row
