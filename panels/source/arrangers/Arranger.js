@@ -22,17 +22,17 @@
 	*/
 	enyo.kind(
 		/** @lends  enyo.Arranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.Arranger',
-		
+
 		/**
 		* @private
 		*/
 		kind: 'Layout',
-		
+
 		/**
 		* @private
 		*/
@@ -185,28 +185,28 @@
 		*/
 		calcArrangementDifference: function (i0, a0, i1, a1) {
 		},
-		
+
 		/**
 		* @private
 		*/
 		canDragEvent: function (event) {
 			return event[this.canDragProp];
 		},
-		
+
 		/**
 		* @private
 		*/
 		calcDragDirection: function (event) {
 			return event[this.dragDirectionProp];
 		},
-		
+
 		/**
 		* @private
 		*/
 		calcDrag: function (event) {
 			return event[this.dragProp];
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -214,7 +214,7 @@
 			var f = this.measureArrangementDelta(-dp, an, a, bn, b);
 			return f;
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -253,7 +253,7 @@
 		arrangeControl: function (control, arrangement) {
 			control._arranger = enyo.mixin(control._arranger || {}, arrangement);
 		},
-		
+
 		/**
 		* Called before HTML is rendered. Applies CSS to panels to ensure GPU acceleration if
 		* {@link enyo.Arranger#accelerated} is `true`
@@ -342,7 +342,7 @@
 			this.controlsIndex = whole;
 			return c$;
 		},
-		
+
 		/**
 		* @lends  enyo.Arranger
 		* @private
@@ -357,7 +357,7 @@
 			* @public
 			*/
 			positionControl: function (control, bounds, unit) {
-				var unit = unit || 'px';
+				unit = unit || 'px';
 				if (!this.updating) {
 					// IE10 uses setBounds because of control hit caching problems seem in some apps
 					if (enyo.dom.canTransform() && !control.preventTransform && !enyo.platform.android && enyo.platform.ie !== 10) {

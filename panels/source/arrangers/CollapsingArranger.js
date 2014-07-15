@@ -1,4 +1,4 @@
-﻿(function (enyo, scope) {
+(function (enyo, scope) {
 	/**
 	* _enyo.CollapsingArranger_ is an {@link enyo.Arranger} that
 	* displays the active control, along with some number of inactive	controls to
@@ -23,12 +23,12 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.CollapsingArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: "enyo.CollapsingArranger",
-		
+
 		/**
 		* @private
 		*/
@@ -43,11 +43,11 @@
 		* @public
 		*/
 		peekWidth: 0,
-		
+
 		/**
 		* If a panel is added or removed after construction, ensure that any control marked to fill
 		* remaining space (by `_fit` member on control) is reset.
-		* 
+		*
 		* @see {@link enyo.Arranger#size}
 		* @method
 		* @protected
@@ -58,10 +58,10 @@
 				sup.apply(this, arguments);
 			};
 		}),
-		
+
 		/**
 		* Resets any panel marked to fill remaining space that isn't, in fact, the last panel
-		* 
+		*
 		* @private
 		*/
 		clearLastSize: function () {
@@ -72,7 +72,7 @@
 				}
 			}
 		},
-		
+
 		/**
 		* @method
 		* @private
@@ -83,9 +83,9 @@
 				this.peekWidth = this.container.peekWidth != null ? this.container.peekWidth : this.peekWidth;
 			};
 		}),
-		
+
 		/**
-		* Arranges controls from left to right starting with first panel. If 
+		* Arranges controls from left to right starting with first panel. If
 		* {@link enyo.CollapsingArranger#peekWidth} is set, any visible control whose index is
 		* less than `arrangement` (the active panel's index) will be revealed by `peekWidth`
 		* pixels.
@@ -114,7 +114,7 @@
 				}
 			}
 		},
-		
+
 		/**
 		* Calculates the change in `left` position of the last panel for the two arrangements
 		* `a0` and `a1`
@@ -124,9 +124,9 @@
 		*/
 		calcArrangementDifference: function (i0, a0, i1, a1) {
 			var i = this.container.getPanels().length-1;
-			return Math.abs(inA1[i].left - inA0[i].left);
+			return Math.abs(a1[i].left - a0[i].left);
 		},
-		
+
 		/**
 		* If the container's `realtimeFit` is `true`, resizes the last panel to fill the space.
 		* This ensures that will dragging or animating to the last index, there is never blank
@@ -151,10 +151,10 @@
 
 			};
 		}),
-		
+
 		/**
 		* Ensures the last panel fills the remaining space when a transition completes
-		* 
+		*
 		* @see {@link enyo.Arranger#finish}
 		* @method
 		* @private
@@ -171,7 +171,7 @@
 				}
 			};
 		}),
-		
+
 		/**
 		* Resizes `control` to match the width of the container minus the given `offset`
 		*

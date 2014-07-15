@@ -7,7 +7,7 @@
     *
     * @ui
     * @class  enyo.Styles
-    * @public
+    * @private
     */
 
     enyo.Styles = function(oControl) {
