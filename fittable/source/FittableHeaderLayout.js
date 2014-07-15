@@ -38,7 +38,7 @@
 
                 if (padding < 0) {
                     f.applyStyle('padding-left', Math.abs(padding) + 'px');
-                    f.applyStyle("padding-right', null);
+                    f.applyStyle('padding-right', null);
                 } else if (padding > 0) {
                     f.applyStyle('padding-left', null);
                     f.applyStyle('padding-right', Math.abs(padding) + 'px');
