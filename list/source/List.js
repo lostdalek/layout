@@ -89,6 +89,7 @@
 	*
 	* A List's `components` block contains the controls to be used for a single
 	* row. This set of controls will be rendered for each row. You may customize
+<<<<<<< HEAD
 	* row rendering by handling the _onSetupItem_ event.
 	*
 	* Events fired from within list rows contain the _index_ property, which may
@@ -100,6 +101,23 @@
 	*
 	* For more information, see the documentation on
 	* [Lists](building-apps/layout/lists.html) in the Enyo Developer Guide.
+=======
+	* row rendering by handling the {@link enyo.List#event:onSetupItem} event.
+	*
+	* Events fired from within list rows contain the `index` property, which may
+	* be used to identify the row from which the event originated.
+	*
+	* Beginning with Enyo 2.2, lists have built-in support for swipeable and
+	* reorderable list items.  Individual list items are swipeable by default; to
+	* enable reorderability, set the {@link enyo.List#reorderable} property to `true`.
+	*
+	* For more information, see the documentation on
+	* [Lists](building-apps/layout/lists.html) in the Enyo Developer Guide.
+	*
+	* @class enyo.List
+	* @extends enyo.Scroller
+	* @public
+>>>>>>> adds docs for List
 	*/
 	enyo.kind(
 		/** @lends enyo.List.prototype */ {
@@ -1283,7 +1301,11 @@
 		* Sets the selection state for the given row index.
 		*
 		* Modifying selection will not automatically re-render the row, so use
+<<<<<<< HEAD
 		* `[renderRow()]{@link enyo.List#renderRow}` or `[refresh()]{@link enyo.List#refresh} to
+=======
+		* `[renderRow()]{@link enyo.List#renderRow}` or `[refresh()]{@link enyo.List#refresh}` to
+>>>>>>> adds docs for List
 		* update the view.
 		*
 		* @param {Number} index - Index of row
@@ -1298,7 +1320,11 @@
 		* Clears the selection state for the given row index.
 		*
 		* Modifying selection will not automatically re-render the row, so use
+<<<<<<< HEAD
 		* `[renderRow()]{@link enyo.List#renderRow}` or `[refresh()]{@link enyo.List#refresh} to
+=======
+		* `[renderRow()]{@link enyo.List#renderRow}` or `[refresh()]{@link enyo.List#refresh}` to
+>>>>>>> adds docs for List
 		* update the view.
 		*
 		* @param {Number} index - Index of row
