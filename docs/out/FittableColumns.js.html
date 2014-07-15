@@ -25,24 +25,52 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>﻿/**
-	_enyo.FittableColumns_ provides a container in which items are laid out in a
-	set of vertical columns, with most items having natural size, but one
-	expanding to fill the remaining space. The one that expands is labeled with
-	the attribute _fit: true_.
+            <pre class="prettyprint source linenums"><code>(function (enyo, scope) {
 
-	For more information, see the documentation on
-	[Fittables](building-apps/layout/fittables.html) in the Enyo Developer Guide.
-*/
+    /**
+    * _enyo.FittableColumns_ provides a container in which items are laid out in a
+    * set of vertical columns, with most items having natural size, but one
+    * expanding to fill the remaining space. The one that expands is labeled with
+    * the attribute _fit: true_.
+    *
+    * For more information, see the documentation on
+    * [Fittables](building-apps/layout/fittables.html) in the Enyo Developer Guide.
+    *
+    * @ui
+    * @class  enyo.FittableColumns
+    * @extends enyo.Control
+    * @public
+    */
 
-enyo.kind({
-	name: "enyo.FittableColumns",
-	layoutKind: "FittableColumnsLayout",
-	/** By default, items in columns stretch to fit vertically; set to true to
-		avoid this behavior */
-	noStretch: false
-});
-</code></pre>
+    enyo.kind(/** @lends  enyo.FittableColumns.prototype */{
+
+        /**
+        * @private
+        */
+        name: 'enyo.FittableColumns',
+
+        /**
+        * A [kind]{@link external:kind} used to manage the size and placement of child
+        * [components]{@link enyo.Component}.
+        *
+        * @type {String}
+        * @default ''
+        * @private
+        */
+        layoutKind: 'FittableColumnsLayout',
+
+        /**
+        * By default, items in columns stretch to fit vertically; set to true to
+        * avoid this behavior
+        *
+        * @type {Boolean}
+        * @default 'false'
+        * @public
+        */
+        noStretch: false
+    });
+
+})(enyo, this);</code></pre>
         </article>
     </section>
 
@@ -52,13 +80,13 @@ enyo.kind({
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="enyo.Arranger.html">Arranger</a></li><li><a href="enyo.ContextualLayout.html">ContextualLayout</a></li><li><a href="enyo.Node.html">Node</a></li><li><a href="enyo.Panels.html">Panels</a></li><li><a href="enyo.Slideable.html">Slideable</a></li></ul><h3>Events</h3><ul><li><a href="enyo.Node.html#event:event:onDestroyed">event:onDestroyed</a></li><li><a href="enyo.Node.html#event:event:onExpand">event:onExpand</a></li><li><a href="enyo.Node.html#event:event:onNodeDblClick">event:onNodeDblClick</a></li><li><a href="enyo.Node.html#event:event:onNodeTap">event:onNodeTap</a></li><li><a href="enyo.Panels.html#event:event:onTransitionFinish">event:onTransitionFinish</a></li><li><a href="enyo.Panels.html#event:event:onTransitionStart">event:onTransitionStart</a></li><li><a href="enyo.Slideable.html#event:event:onAnimateFinish">event:onAnimateFinish</a></li><li><a href="enyo.Slideable.html#event:event:onChange">event:onChange</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animate">animate</a></li><li><a href="global.html#buildReorderContainer">buildReorderContainer</a></li><li><a href="global.html#calcNewDragPosition">calcNewDragPosition</a></li><li><a href="global.html#checkForAutoScroll">checkForAutoScroll</a></li><li><a href="global.html#cleanupMemory">cleanupMemory</a></li><li><a href="global.html#completeFinishReordering">completeFinishReordering</a></li><li><a href="global.html#createPlaceholderNode">createPlaceholderNode</a></li><li><a href="global.html#defaultScale">defaultScale</a></li><li><a href="global.html#deselect">deselect</a></li><li><a href="global.html#dragProp">dragProp</a></li><li><a href="global.html#finishReordering">finishReordering</a></li><li><a href="global.html#flow">flow</a></li><li><a href="global.html#getSelection">getSelection</a></li><li><a href="global.html#horizontalDragPropagation">horizontalDragPropagation</a></li><li><a href="global.html#incrementalPoints">incrementalPoints</a></li><li><a href="global.html#isSwiping">isSwiping</a></li><li><a href="global.html#lowMemory">lowMemory</a></li><li><a href="global.html#movePlaceholderToIndex">movePlaceholderToIndex</a></li><li><a href="global.html#noStretch">noStretch</a></li><li><a href="global.html#peekWidth">peekWidth</a></li><li><a href="global.html#performOnRow">performOnRow</a></li><li><a href="global.html#positionReorderContainer">positionReorderContainer</a></li><li><a href="global.html#reflow">reflow</a></li><li><a href="global.html#renderRow">renderRow</a></li><li><a href="global.html#reorderScroll">reorderScroll</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#select">select</a></li><li><a href="global.html#shouldStartReordering">shouldStartReordering</a></li><li><a href="global.html#startSwipe">startSwipe</a></li><li><a href="global.html#swipeDrag">swipeDrag</a></li><li><a href="global.html#swipeDragStart">swipeDragStart</a></li><li><a href="global.html#thumb">thumb</a></li><li><a href="global.html#touchOverscroll">touchOverscroll</a></li><li><a href="global.html#updatePagePositions">updatePagePositions</a></li><li><a href="global.html#updatePageSize">updatePageSize</a></li><li><a href="global.html#verticalDragPropagation">verticalDragPropagation</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="enyo.Arranger.html">Arranger</a></li><li><a href="enyo.CardArranger.html">CardArranger</a></li><li><a href="enyo.CardSlideInArranger.html">CardSlideInArranger</a></li><li><a href="enyo.CarouselArranger.html">CarouselArranger</a></li><li><a href="enyo.CollapsingArranger.html">CollapsingArranger</a></li><li><a href="enyo.ContextualLayout.html">ContextualLayout</a></li><li><a href="enyo.DockRightArranger.html">DockRightArranger</a></li><li><a href="enyo.FittableColumns.html">FittableColumns</a></li><li><a href="enyo.FittableColumnsLayout.html">FittableColumnsLayout</a></li><li><a href="enyo.FittableLayout.html">FittableLayout</a></li><li><a href="enyo.FittableRows.html">FittableRows</a></li><li><a href="enyo.FittableRowsLayout.html">FittableRowsLayout</a></li><li><a href="enyo.LeftRightArranger.html">LeftRightArranger</a></li><li><a href="enyo.Node.html">Node</a></li><li><a href="enyo.Panels.html">Panels</a></li><li><a href="enyo.Slideable.html">Slideable</a></li><li><a href="enyo.SpiralArranger.html">SpiralArranger</a></li><li><a href="enyo.TopButtonArranger.html">TopButtonArranger</a></li></ul><h3>Events</h3><ul><li><a href="enyo.List.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.List.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.List.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.List.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.List.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.List.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.Node.html#event:event:onDestroyed">event:onDestroyed</a></li><li><a href="enyo.Node.html#event:event:onExpand">event:onExpand</a></li><li><a href="enyo.Node.html#event:event:onNodeDblClick">event:onNodeDblClick</a></li><li><a href="enyo.Node.html#event:event:onNodeTap">event:onNodeTap</a></li><li><a href="enyo.Panels.html#event:event:onTransitionFinish">event:onTransitionFinish</a></li><li><a href="enyo.Panels.html#event:event:onTransitionStart">event:onTransitionStart</a></li><li><a href="enyo.Slideable.html#event:event:onAnimateFinish">event:onAnimateFinish</a></li><li><a href="enyo.Slideable.html#event:event:onChange">event:onChange</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animate">animate</a></li><li><a href="global.html#cleanupMemory">cleanupMemory</a></li><li><a href="global.html#defaultScale">defaultScale</a></li><li><a href="global.html#fitLayoutClass">fitLayoutClass</a></li><li><a href="global.html#horizontalDragPropagation">horizontalDragPropagation</a></li><li><a href="global.html#lowMemory">lowMemory</a></li><li><a href="global.html#orient">orient</a></li><li><a href="global.html#thumb">thumb</a></li><li><a href="global.html#touchOverscroll">touchOverscroll</a></li><li><a href="global.html#verticalDragPropagation">verticalDragPropagation</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Jul 14 2014 14:32:56 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Tue Jul 15 2014 15:12:54 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>

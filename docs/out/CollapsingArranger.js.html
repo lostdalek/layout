@@ -25,114 +25,195 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>﻿/**
-	_enyo.CollapsingArranger_ is an [enyo.Arranger](#enyo.Arranger) that
-	displays the active control, along with some number of inactive	controls to
-	fill the available space. The active control is positioned on the left side
-	of the container and the rest of the views are laid out to the right. The
-	last control, if visible, will expand to fill whatever space is not taken
-	up by the previous controls.
-
-	For best results with CollapsingArranger, you should set a minimum width
-	for each control via a CSS style, e.g., _min-width: 25%_ or
-	_min-width: 250px_.
-
-	Transitions between arrangements are handled by sliding the new control	in
-	from the right and collapsing the old control to the left.
-
-	For more information, see the documentation on
-	[Arrangers](building-apps/layout/arrangers.html) in the Enyo Developer Guide.
-*/
-enyo.kind({
-	name: "enyo.CollapsingArranger",
-	kind: "CarouselArranger",
+            <pre class="prettyprint source linenums"><code>﻿(function (enyo, scope) {
 	/**
-		The distance (in pixels) that each panel should be offset from the left
-		when it is selected. This allows controls on the underlying panel to the
-		left of the selected one to be partially revealed.
+	* _enyo.CollapsingArranger_ is an {@link enyo.Arranger} that
+	* displays the active control, along with some number of inactive	controls to
+	* fill the available space. The active control is positioned on the left side
+	* of the container and the rest of the views are laid out to the right. The
+	* last control, if visible, will expand to fill whatever space is not taken
+	* up by the previous controls.
+	*
+	* For best results with CollapsingArranger, you should set a minimum width
+	* for each control via a CSS style, e.g., `min-width: 25%` or
+	* `min-width: 250px`.
+	*
+	* Transitions between arrangements are handled by sliding the new control	in
+	* from the right and collapsing the old control to the left.
+	*
+	* For more information, see the documentation on
+	* [Arrangers](building-apps/layout/arrangers.html) in the Enyo Developer Guide.
+	*
+	* @class enyo.CollapsingArranger
+	* @extends enyo.CarouselArranger
+	* @public
 	*/
-	peekWidth: 0,
-	//* @protected
-	size: enyo.inherit(function(sup) {
-		return function() {
-			this.clearLastSize();
-			sup.apply(this, arguments);
-		};
-	}),
-	// clear size from last if it's not actually the last
-	// (required for adding another control)
-	clearLastSize: function() {
-		for (var i=0, c$=this.container.getPanels(), c; (c=c$[i]); i++) {
-			if (c._fit &amp;&amp; i != c$.length-1) {
-				c.applyStyle("width", null);
-				c._fit = null;
-			}
-		}
-	},
-	constructor: enyo.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			this.peekWidth = this.container.peekWidth != null ? this.container.peekWidth : this.peekWidth;
-		};
-	}),
-	arrange: function(inC, inIndex) {
-		var c$ = this.container.getPanels();
-		for (var i=0, e=this.containerPadding.left, c, n=0; (c=c$[i]); i++) {
-			if(c.getShowing()){
-				this.arrangeControl(c, {left: e + n * this.peekWidth});
-				if (i >= inIndex) {
-					e += c.width + c.marginWidth - this.peekWidth;
-				}
-				n++;
-			} else {
-				this.arrangeControl(c, {left: e});
-				if (i >= inIndex) {
-					e += c.width + c.marginWidth;
-				}
-			}
-			// FIXME: overdragging-ish
-			if (i == c$.length - 1 &amp;&amp; inIndex &lt; 0) {
-				this.arrangeControl(c, {left: e - inIndex});
-			}
-		}
-	},
-	calcArrangementDifference: function(inI0, inA0, inI1, inA1) {
-		var i = this.container.getPanels().length-1;
-		return Math.abs(inA1[i].left - inA0[i].left);
-	},
-	flowControl: enyo.inherit(function(sup) {
-		return function(inControl, inA) {
-			sup.apply(this, arguments);
-			if (this.container.realtimeFit) {
-				var c$ = this.container.getPanels();
-				var l = c$.length-1;
-				var last = c$[l];
-				if (inControl == last) {
-					this.fitControl(inControl, inA.left);
+	enyo.kind(
+		/** @lends enyo.CollapsingArranger.prototype */ {
+		
+		/**
+		* @private
+		*/
+		name: "enyo.CollapsingArranger",
+		
+		/**
+		* @private
+		*/
+		kind: "CarouselArranger",
+		/**
+		* The distance (in pixels) that each panel should be offset from the left
+		* when it is selected. This allows controls on the underlying panel to the
+		* left of the selected one to be partially revealed.
+		*
+		* *Note:* Imported from container at construction-time.
+		*
+		* @public
+		*/
+		peekWidth: 0,
+		
+		/**
+		* If a panel is added or removed after construction, ensure that any control marked to fill
+		* remaining space (by `_fit` member on control) is reset.
+		* 
+		* @see {@link enyo.Arranger#size}
+		* @method
+		* @protected
+		*/
+		size: enyo.inherit(function (sup) {
+			return function () {
+				this.clearLastSize();
+				sup.apply(this, arguments);
+			};
+		}),
+		
+		/**
+		* Resets any panel marked to fill remaining space that isn't, in fact, the last panel
+		* 
+		* @private
+		*/
+		clearLastSize: function () {
+			for (var i=0, c$=this.container.getPanels(), c; (c=c$[i]); i++) {
+				if (c._fit &amp;&amp; i != c$.length-1) {
+					c.applyStyle("width", null);
+					c._fit = null;
 				}
 			}
+		},
+		
+		/**
+		* @method
+		* @private
+		*/
+		constructor: enyo.inherit(function (sup) {
+			return function () {
+				sup.apply(this, arguments);
+				this.peekWidth = this.container.peekWidth != null ? this.container.peekWidth : this.peekWidth;
+			};
+		}),
+		
+		/**
+		* Arranges controls from left to right starting with first panel. If 
+		* {@link enyo.CollapsingArranger#peekWidth} is set, any visible control whose index is
+		* less than `arrangement` (the active panel's index) will be revealed by `peekWidth`
+		* pixels.
+		*
+		* @see {@link enyo.Arranger#arrange}
+		* @protected
+		*/
+		arrange: function (controls, arrangement) {
+			var c$ = this.container.getPanels();
+			for (var i=0, e=this.containerPadding.left, c, n=0; (c=c$[i]); i++) {
+				if(c.getShowing()){
+					this.arrangeControl(c, {left: e + n * this.peekWidth});
+					if (i >= arrangement) {
+						e += c.width + c.marginWidth - this.peekWidth;
+					}
+					n++;
+				} else {
+					this.arrangeControl(c, {left: e});
+					if (i >= arrangement) {
+						e += c.width + c.marginWidth;
+					}
+				}
+				// FIXME: overdragging-ish
+				if (i == c$.length - 1 &amp;&amp; arrangement &lt; 0) {
+					this.arrangeControl(c, {left: e - arrangement});
+				}
+			}
+		},
+		
+		/**
+		* Calculates the change in `left` position of the last panel for the two arrangements
+		* `a0` and `a1`
+		*
+		* @see {@link enyo.Arranger#calcArrangementDifference}
+		* @private
+		*/
+		calcArrangementDifference: function (i0, a0, i1, a1) {
+			var i = this.container.getPanels().length-1;
+			return Math.abs(inA1[i].left - inA0[i].left);
+		},
+		
+		/**
+		* If the container's `realtimeFit` is `true`, resizes the last panel to fill the space.
+		* This ensures that will dragging or animating to the last index, there is never blank
+		* space to the right of the last panel. If `realtimeFit` is falsey, the last panel is not
+		* resized until {@link enyo.CollapsingArranger#finish}.
+		*
+		* @see {@link enyo.Arranger#flowControls}
+		* @method
+		* @private
+		*/
+		flowControl: enyo.inherit(function (sup) {
+			return function (inControl, inA) {
+				sup.apply(this, arguments);
+				if (this.container.realtimeFit) {
+					var c$ = this.container.getPanels();
+					var l = c$.length-1;
+					var last = c$[l];
+					if (inControl == last) {
+						this.fitControl(inControl, inA.left);
+					}
+				}
 
-		};
-	}),
-	finish: enyo.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			if (!this.container.realtimeFit &amp;&amp; this.containerBounds) {
-				var c$ = this.container.getPanels();
-				var a$ = this.container.arrangement;
-				var l = c$.length-1;
-				var c = c$[l];
-				this.fitControl(c, a$[l].left);
-			}
-		};
-	}),
-	fitControl: function(inControl, inOffset) {
-		inControl._fit = true;
-		inControl.applyStyle("width", (this.containerBounds.width - inOffset) + "px");
-		inControl.resize();
-	}
-});
-</code></pre>
+			};
+		}),
+		
+		/**
+		* Ensures the last panel fills the remaining space when a transition completes
+		* 
+		* @see {@link enyo.Arranger#finish}
+		* @method
+		* @private
+		*/
+		finish: enyo.inherit(function (sup) {
+			return function () {
+				sup.apply(this, arguments);
+				if (!this.container.realtimeFit &amp;&amp; this.containerBounds) {
+					var c$ = this.container.getPanels();
+					var a$ = this.container.arrangement;
+					var l = c$.length-1;
+					var c = c$[l];
+					this.fitControl(c, a$[l].left);
+				}
+			};
+		}),
+		
+		/**
+		* Resizes `control` to match the width of the container minus the given `offset`
+		*
+		* @param {enyo.Control} control - Control that should `_fit` in the remaining space
+		* @param {Number} offset        - Left offset of the control with respect to the container
+		* @private
+		*/
+		fitControl: function (control, offset) {
+			control._fit = true;
+			control.applyStyle("width", (this.containerBounds.width - offset) + "px");
+			control.resize();
+		}
+	});
+
+})(enyo, this);</code></pre>
         </article>
     </section>
 
@@ -142,13 +223,13 @@ enyo.kind({
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="enyo.Arranger.html">Arranger</a></li><li><a href="enyo.ContextualLayout.html">ContextualLayout</a></li><li><a href="enyo.Node.html">Node</a></li><li><a href="enyo.Panels.html">Panels</a></li><li><a href="enyo.Slideable.html">Slideable</a></li></ul><h3>Events</h3><ul><li><a href="enyo.Node.html#event:event:onDestroyed">event:onDestroyed</a></li><li><a href="enyo.Node.html#event:event:onExpand">event:onExpand</a></li><li><a href="enyo.Node.html#event:event:onNodeDblClick">event:onNodeDblClick</a></li><li><a href="enyo.Node.html#event:event:onNodeTap">event:onNodeTap</a></li><li><a href="enyo.Panels.html#event:event:onTransitionFinish">event:onTransitionFinish</a></li><li><a href="enyo.Panels.html#event:event:onTransitionStart">event:onTransitionStart</a></li><li><a href="enyo.Slideable.html#event:event:onAnimateFinish">event:onAnimateFinish</a></li><li><a href="enyo.Slideable.html#event:event:onChange">event:onChange</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animate">animate</a></li><li><a href="global.html#buildReorderContainer">buildReorderContainer</a></li><li><a href="global.html#calcNewDragPosition">calcNewDragPosition</a></li><li><a href="global.html#checkForAutoScroll">checkForAutoScroll</a></li><li><a href="global.html#cleanupMemory">cleanupMemory</a></li><li><a href="global.html#completeFinishReordering">completeFinishReordering</a></li><li><a href="global.html#createPlaceholderNode">createPlaceholderNode</a></li><li><a href="global.html#defaultScale">defaultScale</a></li><li><a href="global.html#deselect">deselect</a></li><li><a href="global.html#dragProp">dragProp</a></li><li><a href="global.html#finishReordering">finishReordering</a></li><li><a href="global.html#flow">flow</a></li><li><a href="global.html#getSelection">getSelection</a></li><li><a href="global.html#horizontalDragPropagation">horizontalDragPropagation</a></li><li><a href="global.html#incrementalPoints">incrementalPoints</a></li><li><a href="global.html#isSwiping">isSwiping</a></li><li><a href="global.html#lowMemory">lowMemory</a></li><li><a href="global.html#movePlaceholderToIndex">movePlaceholderToIndex</a></li><li><a href="global.html#noStretch">noStretch</a></li><li><a href="global.html#peekWidth">peekWidth</a></li><li><a href="global.html#performOnRow">performOnRow</a></li><li><a href="global.html#positionReorderContainer">positionReorderContainer</a></li><li><a href="global.html#reflow">reflow</a></li><li><a href="global.html#renderRow">renderRow</a></li><li><a href="global.html#reorderScroll">reorderScroll</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#select">select</a></li><li><a href="global.html#shouldStartReordering">shouldStartReordering</a></li><li><a href="global.html#startSwipe">startSwipe</a></li><li><a href="global.html#swipeDrag">swipeDrag</a></li><li><a href="global.html#swipeDragStart">swipeDragStart</a></li><li><a href="global.html#thumb">thumb</a></li><li><a href="global.html#touchOverscroll">touchOverscroll</a></li><li><a href="global.html#updatePagePositions">updatePagePositions</a></li><li><a href="global.html#updatePageSize">updatePageSize</a></li><li><a href="global.html#verticalDragPropagation">verticalDragPropagation</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="enyo.Arranger.html">Arranger</a></li><li><a href="enyo.CardArranger.html">CardArranger</a></li><li><a href="enyo.CardSlideInArranger.html">CardSlideInArranger</a></li><li><a href="enyo.CarouselArranger.html">CarouselArranger</a></li><li><a href="enyo.CollapsingArranger.html">CollapsingArranger</a></li><li><a href="enyo.ContextualLayout.html">ContextualLayout</a></li><li><a href="enyo.DockRightArranger.html">DockRightArranger</a></li><li><a href="enyo.FittableColumns.html">FittableColumns</a></li><li><a href="enyo.FittableColumnsLayout.html">FittableColumnsLayout</a></li><li><a href="enyo.FittableLayout.html">FittableLayout</a></li><li><a href="enyo.FittableRows.html">FittableRows</a></li><li><a href="enyo.FittableRowsLayout.html">FittableRowsLayout</a></li><li><a href="enyo.LeftRightArranger.html">LeftRightArranger</a></li><li><a href="enyo.Node.html">Node</a></li><li><a href="enyo.Panels.html">Panels</a></li><li><a href="enyo.Slideable.html">Slideable</a></li><li><a href="enyo.SpiralArranger.html">SpiralArranger</a></li><li><a href="enyo.TopButtonArranger.html">TopButtonArranger</a></li></ul><h3>Events</h3><ul><li><a href="enyo.List.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.List.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.List.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.List.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.List.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.List.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.Node.html#event:event:onDestroyed">event:onDestroyed</a></li><li><a href="enyo.Node.html#event:event:onExpand">event:onExpand</a></li><li><a href="enyo.Node.html#event:event:onNodeDblClick">event:onNodeDblClick</a></li><li><a href="enyo.Node.html#event:event:onNodeTap">event:onNodeTap</a></li><li><a href="enyo.Panels.html#event:event:onTransitionFinish">event:onTransitionFinish</a></li><li><a href="enyo.Panels.html#event:event:onTransitionStart">event:onTransitionStart</a></li><li><a href="enyo.Slideable.html#event:event:onAnimateFinish">event:onAnimateFinish</a></li><li><a href="enyo.Slideable.html#event:event:onChange">event:onChange</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animate">animate</a></li><li><a href="global.html#cleanupMemory">cleanupMemory</a></li><li><a href="global.html#defaultScale">defaultScale</a></li><li><a href="global.html#fitLayoutClass">fitLayoutClass</a></li><li><a href="global.html#horizontalDragPropagation">horizontalDragPropagation</a></li><li><a href="global.html#lowMemory">lowMemory</a></li><li><a href="global.html#orient">orient</a></li><li><a href="global.html#thumb">thumb</a></li><li><a href="global.html#touchOverscroll">touchOverscroll</a></li><li><a href="global.html#verticalDragPropagation">verticalDragPropagation</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Jul 14 2014 14:32:56 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Tue Jul 15 2014 15:12:54 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>
