@@ -169,16 +169,7 @@
 		* @private
 		*/
 		events: {
-			/**
-				Fires once per row at render time.
-
-				_inEvent.index_ contains the current row index.
-
-				_inEvent.selected_ is a boolean indicating whether the current row
-				is selected.
-			*/
 			onSetupItem: '',
-			//* Fires after an individual row has been rendered from a call to _renderRow()_.
 			onRenderRow: ''
 		},
 
