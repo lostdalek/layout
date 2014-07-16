@@ -14,6 +14,7 @@
 	* }
 	* ```
 	*
+	* @ui
 	* @class enyo.AroundList
 	* @extends enyo.List
 	* @public

@@ -23,25 +23,25 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.CarouselArranger */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.CarouselArranger',
-		
+
 		/**
 		* @private
 		*/
 		kind: 'Arranger',
-		
+
 		/**
-		* Calculates the size of each panel. Considers the padding of the container by calling 
+		* Calculates the size of each panel. Considers the padding of the container by calling
 		* {@link enyo.dom#calcPaddingExtents} and control margin by calling
 		* {@link enyo.dom#calcMarginExtents}. If the container is larger than the combined sizes of
 		* the controls, one control may be set to fill the remaining space by setting its `fit`
 		* property to `true`. If multiple controls are set to `fit`, the last control will take
 		* precedence.
-		* 
+		*
 		* @protected
 		*/
 		size: function () {
@@ -70,7 +70,7 @@
 				c.setBounds({top: padding.top, bottom: padding.bottom, width: c.fit ? c.width : null});
 			}
 		},
-		
+
 		/**
 		* @see {@link enyo.Arranger#arrange}
 		* @protected
@@ -82,7 +82,7 @@
 				this.arrangeNoWrap(controls, arrangement);
 			}
 		},
-		
+
 		/**
 		* Non-wrapping carousel arranges the controls from left to right without regard to the
 		* ordered array passed via `controls`. `arrangement` will contain the index of the active
@@ -127,11 +127,11 @@
 				}
 			}
 		},
-		
+
 		/**
-		* Arranges `controls` from left to right such that the active panel is always the 
+		* Arranges `controls` from left to right such that the active panel is always the
 		* left-most with each subsequent panel to its right.
-		* 
+		*
 		* @private
 		*/
 		arrangeWrap: function (controls, arrangement) {
@@ -140,7 +140,7 @@
 				e += c.width + c.marginWidth;
 			}
 		},
-		
+
 		/**
 		* Calculates the change in `left` position of the two arrangements `a0` and `a1`
 		* @protected
@@ -149,10 +149,10 @@
 			var i = Math.abs(i0 % this.c$.length);
 			return a0[i].left - a1[i].left;
 		},
-		
+
 		/**
 		* Resets the size and position of all the panels
-		* 
+		*
 		* @method
 		* @private
 		*/

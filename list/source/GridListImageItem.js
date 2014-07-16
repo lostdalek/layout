@@ -4,23 +4,24 @@
 	* an {@link enyo.DataGridList} to display an image grid with an
 	* optional caption and subcaption.
 	*
+	* @ui
 	* @class enyo.GridListImageItem
 	* @extends enyo.Control
 	* @public
 	*/
 	enyo.kind(
 		/** @lends enyo.GridListImageItem.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.GridListImageItem',
-		
+
 		/**
 		* @private
 		*/
 		classes: 'enyo-gridlist-imageitem',
-		
+
 		/**
 		* @private
 		*/
@@ -29,7 +30,7 @@
 			{name: 'caption', classes: 'caption'},
 			{name: 'subCaption', classes: 'sub-caption'}
 		],
-		
+
 		/**
 		* @lends enyo.GridListImageItem.prototype
 		* @private
@@ -84,12 +85,12 @@
 
 			/**
 			* By default, the width of the image fits the width of the item, and the
-			* height is sized naturally, based on the image's aspect ratio.  Set this 
+			* height is sized naturally, based on the image's aspect ratio.  Set this
 			* property to `'constrain'` to letterbox the image in the available space,
 			* or `'cover'` to cover the available space with the image (cropping the
 			* larger dimension).  Note that, when _imageSizing_ is explicitly specified,
 			* you must indicate whether the caption and subcaption are used (by setting
-			* the {@link enyo.GridListImageItem#useCaption} and 
+			* the {@link enyo.GridListImageItem#useCaption} and
 			* {@link enyo.GridListImageItem#useSubCaption} flags) to ensure proper sizing.
 			*
 			* @type {String}
@@ -99,7 +100,7 @@
 			imageSizing: '',
 
 			/**
-			* When explicitly specifying an {@link enyo.GridListImageItem#imageSizing} option, set 
+			* When explicitly specifying an {@link enyo.GridListImageItem#imageSizing} option, set
 			* to false if the caption space should not be reserved. This property has no effect
 			* when `imageSizing` retains its default value.
 			*
@@ -110,7 +111,7 @@
 			useCaption: true,
 
 			/**
-			* When explicitly specifying an {@link enyo.GridListImageItem#imageSizing} option, set 
+			* When explicitly specifying an {@link enyo.GridListImageItem#imageSizing} option, set
 			* to false if the subcaption space should not be reserved. This property has no effect
 			* when `imageSizing` retains its default value.
 			*
@@ -120,7 +121,7 @@
 			*/
 			useSubCaption: true
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -131,7 +132,7 @@
 			{from: '.subCaption', to: '.$.subCaption.content'},
 			{from: '.subCaption', to: '.$.subCaption.showing', kind: 'enyo.EmptyBinding'}
 		],
-		
+
 		/**
 		* @method
 		* @private
@@ -144,21 +145,21 @@
 				this.centeredChanged();
 			};
 		}),
-		
+
 		/**
 		* @private
 		*/
 		selectedChanged: function () {
 			this.addRemoveClass('selected', this.selected);
 		},
-		
+
 		/**
 		* @private
 		*/
 		disabledChanged: function () {
 			this.addRemoveClass('disabled', this.disabled);
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -170,21 +171,21 @@
 				this.useSubCaptionChanged();
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
 		useCaptionChanged: function () {
 			this.addRemoveClass('use-caption', this.useCaption);
 		},
-		
+
 		/**
 		* @private
 		*/
 		useSubCaptionChanged: function () {
 			this.addRemoveClass('use-subcaption', this.useSubCaption);
 		},
-		
+
 		/**
 		* @private
 		*/

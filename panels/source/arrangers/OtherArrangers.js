@@ -17,12 +17,12 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.LeftRightArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.LeftRightArranger',
-		
+
 		/**
 		* @private
 		*/
@@ -66,7 +66,7 @@
 		 * @protected
 		 */
 		axisPosition: 'left',
-		
+
 		/**
 		* @method
 		* @private
@@ -77,10 +77,10 @@
 				this.margin = this.container.margin != null ? this.container.margin : this.margin;
 			};
 		}),
-		
+
 		/**
 		* Sizes the panels such that they fill {@link enyo.LeftRightArranger#offAxisSize} and yield
-		* {@link enyo.LeftRightArranger#margin} pixels on each side of 
+		* {@link enyo.LeftRightArranger#margin} pixels on each side of
 		* {@link enyo.LeftRightArranger#axisSize}
 		*
 		* @see {@link enyo.Arranger#size}
@@ -97,12 +97,12 @@
 				c.setBounds(b);
 			}
 		},
-		
+
 		/**
 		* To prevent a panel that is switching sides (to maintain the balance) from overlapping the
 		* active panel during the animation, `size` updates the `z-index` of the switching panel
 		* to ensure it stays behind the other panels.
-		* 
+		*
 		* @todo Could use some optimization in its `for` loop (e.g. .length lookup and calc)
 		* @see {@link enyo.Arranger#start}
 		* @method
@@ -134,12 +134,12 @@
 				}
 			};
 		}),
-		
+
 		/**
 		* Balances the panels laid out to each side of the active panel
 		* such that for a set of `n` panels, `floor(n/2)` are before and `ceil(n/2)` are after
 		* the active panel.
-		* 
+		*
 		* @protected
 		*/
 		arrange: function (controls, arrangement) {
@@ -161,11 +161,11 @@
 				e += box;
 			}
 		},
-		
+
 		/**
 		* Calculates the difference along the {@link enyo.LeftRightArranger#axisPosition}
 		* (e.g. left)
-		* 
+		*
 		* @protected
 		*/
 		calcArrangementDifference: function (inI0, inA0, inI1, inA1) {
@@ -177,7 +177,7 @@
 			//enyo.log(inI0, inI1);
 			return inA0[i][this.axisPosition] - inA1[i][this.axisPosition];
 		},
-		
+
 		/**
 		* Resets positioning and opacity of panels
 		*
@@ -219,47 +219,47 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.TopBottomArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.TopBottomArranger',
-		
+
 		/**
 		* @private
 		*/
 		kind: 'LeftRightArranger',
-		
+
 		/**
 		* @see {@link enyo.Arranger#dragProp}
 		* @private
 		*/
 		dragProp: 'ddy',
-		
+
 		/**
 		* @see {@link enyo.Arranger#dragDirectionProp}
 		* @private
 		*/
 		dragDirectionProp: 'yDirection',
-		
+
 		/**
 		* @see {@link enyo.Arranger#canDragProp}
 		* @private
 		*/
 		canDragProp: 'vertical',
-		
+
 		/**
 		* @see {@link enyo.LeftRightArranger#axisSize}
 		* @protected
 		*/
 		axisSize: 'height',
-		
+
 		/**
 		* @see {@link enyo.LeftRightArranger#offAxisSize}
 		* @protected
 		*/
 		offAxisSize: 'width',
-		
+
 		/**
 		* @see {@link enyo.LeftRightArranger#axisPosition}
 		* @protected
@@ -284,30 +284,30 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.SpiralArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.SpiralArranger',
-		
+
 		/**
 		* @private
 		*/
 		kind: 'Arranger',
-		
+
 		/**
 		* @see {@link enyo.Arranger#incrementalPoints}
 		* @private
 		*/
 		incrementalPoints: true,
-		
+
 		/**
 		* The amount of space between successive controls
-		* 
+		*
 		* @private
 		*/
 		inc: 20,
-		
+
 		/**
 		* Each panel is sized to one third of the container
 		*
@@ -323,10 +323,10 @@
 				c.setBounds({width: w, height: h});
 			}
 		},
-		
+
 		/**
 		* Panels are arranged in a spiral with the active panel at center
-		* 
+		*
 		* @see {@link enyo.Arranger#arrange}
 		* @protected
 		*/
@@ -338,10 +338,10 @@
 				this.arrangeControl(c, {left: x, top: y});
 			}
 		},
-		
+
 		/**
 		* Applies descending `z-indez` for each panel starting with the active panel
-		* 
+		*
 		* @see {@link enyo.Arranger#start}
 		* @method
 		* @protected
@@ -355,7 +355,7 @@
 				}
 			};
 		}),
-		
+
 		/**
 		* @see {@link enyo.Arranger#calcArrangementDifference}
 		* @protected
@@ -363,7 +363,7 @@
 		calcArrangementDifference: function (inI0, inA0, inI1, inA1) {
 			return this.controlWidth;
 		},
-		
+
 		/**
 		* Resets position and z-index of panels
 		*
@@ -401,17 +401,17 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.GridArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.GridArranger',
-		
+
 		/**
 		* @private
 		*/
 		kind: 'Arranger',
-		
+
 		/**
 		* @see {@link enyo.Arranger#incrementalPoints}
 		* @private
@@ -435,9 +435,9 @@
 		 * @public
 		 */
 		colHeight: 100,
-		
+
 		/**
-		* Sizes each panel to be {@link enyo.GridArranger#colWidth} pixels wide and 
+		* Sizes each panel to be {@link enyo.GridArranger#colWidth} pixels wide and
 		* {@link enyo.GridArranger#colHeight} pixels high.
 		*
 		* @see {@link enyo.Arranger#size}
@@ -450,12 +450,12 @@
 				c.setBounds({width: w, height: h});
 			}
 		},
-		
+
 		/**
 		* Calculates the number of columns based on the containers width and
 		* {@link enyo.GridArranger#colWidth} and positions each by row starting at the top left of
 		* the container.
-		* 
+		*
 		* @see {@link enyo.Arranger#arrange}
 		* @protected
 		*/
@@ -469,7 +469,7 @@
 				}
 			}
 		},
-		
+
 		/**
 		* If the control is moving between rows, adjust its opacity during the transition
 		*
@@ -483,7 +483,7 @@
 				enyo.Arranger.opacifyControl(inControl, inA.top % this.colHeight !== 0 ? 0.25 : 1);
 			};
 		}),
-		
+
 		/**
 		* @see {@link enyo.Arranger#calcArrangementDifference}
 		* @protected
@@ -491,7 +491,7 @@
 		calcArrangementDifference: function (inI0, inA0, inI1, inA1) {
 			return this.colWidth;
 		},
-		
+
 		/**
 		* Resets position of panels
 		*

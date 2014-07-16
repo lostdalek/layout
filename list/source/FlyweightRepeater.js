@@ -63,6 +63,7 @@
 	* For more information, see the documentation on
 	* [Lists](building-apps/layout/lists.html) in the Enyo Developer Guide.
 	*
+	* @ui
 	* @class enyo.FlyweightRepeater
 	* @extends enyo.Control
 	* @public

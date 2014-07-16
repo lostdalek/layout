@@ -4,11 +4,11 @@
 	* displays only one active control. The non-active controls are hidden with
 	* _setShowing(false)_. Transitions between arrangements are handled by
 	* sliding the new control	over the current one.
-	* 
+	*
 	* Note that CardSlideInArranger always slides controls in from the right. If
 	* you want an arranger that slides to the right and left, try
 	* {@link enyo.LeftRightArranger}.
-	* 
+	*
 	* For more information, see the documentation on
 	* [Arrangers](building-apps/layout/arrangers.html) in the Enyo Developer Guide.
 	*
@@ -18,21 +18,21 @@
 	*/
 	enyo.kind(
 		/** @lends  enyo.CardSlideInArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.CardSlideInArranger',
-		
+
 		/**
 		* @private
 		*/
 		kind: 'CardArranger',
-		
+
 		/**
 		* Shows the active panel at the start of transition. Also triggers a resize on
 		* the active panel if it wasn't previously showing
-		* 
+		*
 		* @todo Seems like poor variable reuse of `i`
 		* @todo Should inherit from super and omit the `for` block
 		* @see {@link enyo.Arranger#start}
@@ -54,7 +54,7 @@
 				i + '.' + l + '.f'
 			];
 		},
-		
+
 		/**
 		* @todo  This method is an exact copy of CardArranger. Since it's calling the super,
 		* 	the work is being done twice. Remove this method
@@ -71,10 +71,10 @@
 				}
 			};
 		}),
-		
+
 		/**
 		* Parses the transition point value to position the panels to slide in from the right
-		* 
+		*
 		* @see {@link enyo.Arranger#arrange}
 		* @protected
 		*/
@@ -99,10 +99,10 @@
 				this.arrangeControl(c, {left: v});
 			}
 		},
-		
+
 		/**
 		* Resets the `left` position of all panels
-		* 
+		*
 		* @method
 		* @private
 		*/

@@ -10,7 +10,7 @@
 	* @property {Number} toIndex   - Index of the new panel
 	* @public
 	*/
-	
+
 	/**
 	* Fires at the end of a panel transition, when {@link enyo.Panels#setIndex} is called,
 	* and also during dragging.
@@ -27,14 +27,14 @@
 	* for application layout. Using _enyo.Panels_, controls may be arranged as
 	* (among other things) a carousel, a set of collapsing panels, a card stack
 	* that fades between panels, or a grid.
-	* 
+	*
 	* Any Enyo control may be placed inside an _enyo.Panels_, but by convention we
 	* refer to each of these controls as a 'panel'. From the set of panels in an
 	* _enyo.Panels_, one is considered to be active. The active panel is set by
 	* index using the {@link enyo.Panels#setIndex} method. The actual layout of the panels
 	* typically changes each time the active panel is set, such that the new
 	* active panel has the most prominent position.
-	* 
+	*
 	* For more information, see the documentation on
 	* [Panels](building-apps/layout/panels.html) in the Enyo Developer Guide.
 	*
@@ -45,17 +45,17 @@
 	*/
 	enyo.kind(
 		/** @lends  enyo.Panels.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.Panels',
-		
+
 		/**
 		* @private
 		*/
 		classes: 'enyo-panels',
-		
+
 		/**
 		* @lends enyo.Panels.prototype
 		* @private
@@ -63,9 +63,9 @@
 		published: {
 			/**
 			* The index of the active panel. The layout of panels is controlled by
-			* the {@link enyo.Panels#layoutKind}, but as a rule, the active panel is displayed 
-			* in the most prominent position. For example, in the (default) 
-			* {@link enyo.CardArranger} layout, the active panel is shown and the other panels 
+			* the {@link enyo.Panels#layoutKind}, but as a rule, the active panel is displayed
+			* in the most prominent position. For example, in the (default)
+			* {@link enyo.CardArranger} layout, the active panel is shown and the other panels
 			* are hidden.
 			*
 			* @type {Number}
@@ -73,7 +73,7 @@
 			* @public
 			*/
 			index: 0,
-			
+
 			/**
 			* Controls whether the user can drag between panels
 			*
@@ -123,7 +123,7 @@
 			*/
 			narrowFit: true
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -131,7 +131,7 @@
 			onTransitionStart: '',
 			onTransitionFinish: ''
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -141,21 +141,21 @@
 			ondragfinish: 'dragfinish',
 			onscroll: 'domScroll'
 		},
-		
+
 		/**
 		* @private
 		*/
 		tools: [
 			{kind: 'Animator', onStep: 'step', onEnd: 'completed'}
 		],
-		
+
 		/**
 		* Tracks the percent complete transition between 2 panels
-		* 
+		*
 		* @private
 		*/
 		fraction: 0,
-		
+
 		/**
 		* @method
 		* @private
@@ -169,7 +169,7 @@
 				this.indexChanged();
 			};
 		}),
-		
+
 		/**
 		* @method
 		* @private
@@ -180,7 +180,7 @@
 				enyo.makeBubble(this, 'scroll');
 			};
 		}),
-		
+
 		/**
 		* @private
 		*/
@@ -192,7 +192,7 @@
 				}
 			}
 		},
-		
+
 		/**
 		* @method
 		* @private
@@ -203,21 +203,21 @@
 				sup.apply(this, arguments);
 			};
 		}),
-		
+
 		/**
 		* @private
 		*/
 		arrangerKindChanged: function () {
 			this.setLayoutKind(this.arrangerKind);
 		},
-		
+
 		/**
 		* @private
 		*/
 		narrowFitChanged: function () {
 			this.addRemoveClass(enyo.Panels.getNarrowClass(), this.narrowFit);
 		},
-		
+
 		/**
 		* @method
 		* @private
@@ -230,10 +230,10 @@
 				sup.apply(this, arguments);
 			};
 		}),
-		
+
 		/**
 		* Adjusts the index if the removed control is the active panel and reflows the layout
-		* 
+		*
 		* @method
 		* @private
 		*/
@@ -265,12 +265,12 @@
 		*
 		* @return {Boolean} [description]
 		* @protected
-		* @todo  Assume that this should take a control as a parameter. 
+		* @todo  Assume that this should take a control as a parameter.
 		*/
 		isPanel: function () {
 			return true;
 		},
-		
+
 		/**
 		* @method
 		* @private
@@ -281,7 +281,7 @@
 				sup.apply(this, arguments);
 			};
 		}),
-		
+
 		/**
 		* @method
 		* @private
@@ -433,7 +433,7 @@
 				return Math.max(0, Math.min(value, l - 1));
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -459,7 +459,7 @@
 				}
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -468,7 +468,7 @@
 			this.stepTransition();
 			return true;
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -481,7 +481,7 @@
 			this.finishTransition(true);
 			return true;
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -494,7 +494,7 @@
 				return true;
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -504,7 +504,7 @@
 				this.dragTransition(event);
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -515,7 +515,7 @@
 				this.dragfinishTransition(event);
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -534,7 +534,7 @@
 				this.layout.start();
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -563,7 +563,7 @@
 			}
 			this.stepTransition();
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -576,7 +576,7 @@
 				this.fireTransitionFinish();
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -596,10 +596,10 @@
 			this.fromIndex = f;
 			this.toIndex = t;
 		},
-		
+
 		/**
 		* Resets the panels without sending any events
-		* 
+		*
 		* @private
 		*/
 		refresh: function () {
@@ -647,7 +647,7 @@
 				this.fireTransitionFinish();
 			}
 		},
-		
+
 		/**
 		* @fires enyo.Panels#event:onTransitionStart
 		* @private
@@ -659,7 +659,7 @@
 				this.doTransitionStart(enyo.clone(this.startTransitionInfo));
 			}
 		},
-		
+
 		/**
 		* @fires enyo.Panels#event:onTransitionFinish
 		* @private
@@ -698,8 +698,8 @@
 				}
 			}
 		},
-		
-		
+
+
 		/**
 		* Fetches the arrangement for `index`, initializing it if necessary
 		*
@@ -728,7 +728,7 @@
 			}
 			return r;
 		},
-		
+
 		/**
 		* @lends  enyo.Panels
 		* @private

@@ -15,7 +15,7 @@
 	* @type {Object}
 	* @public
 	*/
-	
+
 	/**
 	* _enyo.Slideable_ is a control that may be dragged either horizontally or
 	* vertically between a minimum and a maximum value. When released from
@@ -53,7 +53,7 @@
 	*/
 	enyo.kind(
 		/** @lends  enyo.Slideable.prototype */ {
-		
+
 		/**
 		* @private
 		*/
@@ -71,16 +71,16 @@
 		published: {
 			/**
 			* Direction of sliding; valid values are 'h' for horizonal or 'v' for vertical
-			* 
+			*
 			* @type {String}
 			* @default 'h'
 			* @public
 			*/
 			axis: 'h',
-			
+
 			/**
 			* Current position of the Slideable (a value between _min_ and _max_)
-			* 
+			*
 			* @type {Number}
 			* @default  0
 			* @public
@@ -123,7 +123,7 @@
 			* @public
 			*/
 			accelerated: 'auto',
-			
+
 			/**
 			* Set to false to prevent the Slideable from dragging with elasticity past
 			* its _min_ or _max_ value
@@ -154,7 +154,7 @@
 
 		/**
 		* Set to true to prevent a drag from bubbling beyond the Slideable
-		* 
+		*
 		* @private
 		*/
 		preventDragPropagation: false,
@@ -174,22 +174,22 @@
 			ondrag: 'drag',
 			ondragfinish: 'dragfinish'
 		},
-		
+
 		/**
 		* @private
 		*/
 		kDragScalar: 1,
-		
+
 		/**
 		* @private
 		*/
 		dragEventProp: 'dx',
-		
+
 		/**
 		* @private
 		*/
 		unitModifier: false,
-		
+
 		/**
 		* @private
 		*/
@@ -197,39 +197,39 @@
 
 		/**
 		* Determines which property of the drag event is used to position the control
-		* 
+		*
 		* @private
 		*/
 		dragMoveProp: 'dx',
-		
+
 		/**
 		* Determines which property of the drag event is used to allow dragging
-		* 
+		*
 		* @private
 		*/
 		shouldDragProp: 'horizontal',
-		
+
 		/**
 		* If {@link enyo.Slideable#canTransform}, the transform property to modify
-		* 
+		*
 		* @private
 		*/
 		transform: 'translateX',
-		
+
 		/**
 		* The dimension attribute to modify, either height or width
-		* 
+		*
 		* @private
 		*/
 		dimension: 'width',
-		
+
 		/**
 		* The position attribute to modify, either top or left
-		* 
+		*
 		* @private
 		*/
 		boundary: 'left',
-		
+
 		/**
 		* @method
 		* @private
@@ -244,7 +244,7 @@
 				this.addClass('enyo-slideable');
 			};
 		}),
-		
+
 		/**
 		* @method
 		* @private
@@ -255,7 +255,7 @@
 				sup.apply(this, arguments);
 			};
 		}),
-		
+
 		/**
 		* @method
 		* @private
@@ -267,7 +267,7 @@
 				this.updateDragScalar();
 			};
 		}),
-		
+
 		/**
 		* @method
 		* @private
@@ -278,12 +278,12 @@
 				this.updateDragScalar();
 			};
 		}),
-		
+
 		/**
-		* If transforms can't be used and inline style is using 'px' while 
+		* If transforms can't be used and inline style is using 'px' while
 		* {@link enyo.Slideable#unit} is '%', {@link enyo.Slideable#unitModifier} is set to the
 		* current value of {@link enyo.Slideable#dimension}
-		* 
+		*
 		* @private
 		*/
 		canModifyUnit: function () {
@@ -296,7 +296,7 @@
 				}
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -309,7 +309,7 @@
 			}
 			return '0';
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -320,7 +320,7 @@
 
 			this.setInlineStyles(inValue, inDimensions);
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -334,14 +334,14 @@
 				}
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
 		transformChanged: function () {
 			this.canTransform = enyo.dom.canTransform();
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -350,7 +350,7 @@
 				enyo.dom.accelerate(this, this.accelerated);
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -362,7 +362,7 @@
 			this.dimension = h ? 'width' : 'height';
 			this.boundary = h ? 'left' : 'top';
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -382,7 +382,7 @@
 				this.setBounds(inBounds, this.unit);
 			}
 		},
-		
+
 		/**
 		* @fires enyo.Slideable#event:onChange
 		* @private
@@ -413,42 +413,42 @@
 			}
 			this.doChange();
 		},
-		
+
 		/**
 		* @private
 		*/
 		getAnimator: function () {
 			return this.$.animator;
 		},
-		
+
 		/**
 		* @private
 		*/
 		isAtMin: function () {
 			return this.value <= this.calcMin();
 		},
-		
+
 		/**
 		* @private
 		*/
 		isAtMax: function () {
 			return this.value >= this.calcMax();
 		},
-		
+
 		/**
 		* @private
 		*/
 		calcMin: function () {
 			return this.min;
 		},
-		
+
 		/**
 		* @private
 		*/
 		calcMax: function () {
 			return this.max;
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -457,14 +457,14 @@
 			var max = this.calcMax();
 			return Math.max(min, Math.min(inValue, max));
 		},
-		
+
 		/**
 		* @private
 		*/
 		dampValue: function (inValue) {
 			return this.dampBound(this.dampBound(inValue, this.min, 1), this.max, -1);
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -475,12 +475,12 @@
 			}
 			return v;
 		},
-		
+
 		/**
 		* Calculates the pixel value for the `percent` of `dimension`
 		*
 		* @param  {Number} percent
-		* @param  {Number} dimension 
+		* @param  {Number} dimension
 		*
 		* @return {Number}
 		* @private
@@ -488,7 +488,7 @@
 		percentToPixels: function (percent, dimension) {
 			return Math.floor((dimension / 100) * percent);
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -496,24 +496,24 @@
 			var boundary = this.unitModifier ? this.getBounds()[this.dimension] : this.container.getBounds()[this.dimension];
 			return (value / boundary) * 100;
 		},
-		
+
 		/**
 		* @private
 		*/
 		shouldDrag: function (inEvent) {
 			return this.draggable && inEvent[this.shouldDragProp];
 		},
-		
+
 		/**
 		* Determines if `value` is out of bounds (e.g. greater than {@link enyo.Slideable#max} or
 		* less than {@link enyo.Slideable#min})
-		* 
+		*
 		* @private
 		*/
 		isOob: function (inValue) {
 			return inValue > this.calcMax() || inValue < this.calcMin();
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -528,11 +528,11 @@
 				return this.preventDragPropagation;
 			}
 		},
-		
+
 		/**
 		* Updates {@link enyo.Slideable#value} during a drag and determines the direction of the
 		* drag
-		* 
+		*
 		* @private
 		*/
 		drag: function (inSender, inEvent) {
@@ -549,7 +549,7 @@
 				return this.preventDragPropagation;
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -561,11 +561,11 @@
 				return this.preventDragPropagation;
 			}
 		},
-		
+
 		/**
 		* Animates the control to either the min or max value when dragging completes based on the
 		* direction of the drag (determined in {@link enyo.Slideable#drag})
-		* 
+		*
 		* @private
 		*/
 		completeDrag: function (event) {
@@ -573,14 +573,14 @@
 				this.animateToMinMax(event.dragInfo.minimizing);
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
 		isAnimating: function () {
 			return this.$.animator.isAnimating();
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -634,17 +634,17 @@
 				this.animateToMax();
 			}
 		},
-		
+
 		/**
 		* Updates {@link enyo.Slideable#value} during animation
-		* 
+		*
 		* @private
 		*/
 		animatorStep: function (sender) {
 			this.setValue(sender.value);
 			return true;
 		},
-		
+
 		/**
 		* @fires enyo.Slideable#event:onAnimateFinish
 		* @private

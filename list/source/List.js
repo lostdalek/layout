@@ -101,6 +101,7 @@
 	* For more information, see the documentation on
 	* [Lists](building-apps/layout/lists.html) in the Enyo Developer Guide.
 	*
+	* @ui
 	* @class enyo.List
 	* @extends enyo.Scroller
 	* @public
@@ -275,17 +276,10 @@
 		* @private
 		*/
 		events: {
-			/**
-				Fires once per row at render time.
-
-				_inEvent.index_ contains the current row index.
-			*/
 			onSetupItem: '',
-			//* Reorder events
 			onSetupReorderComponents: '',
 			onSetupPinnedReorderComponents: '',
 			onReorder: '',
-			//* Swipe events
 			onSetupSwipeItem: '',
 			onSwipeDrag: '',
 			onSwipe: '',

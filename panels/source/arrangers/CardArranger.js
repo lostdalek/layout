@@ -4,7 +4,7 @@
 	* one active control. The non-active controls are hidden with
 	* `setShowing(false)`. Transitions between arrangements are handled by fading
 	* from one control to the next.
-	* 
+	*
 	* For more information, see the documentation on
 	* [Arrangers](building-apps/layout/arrangers.html) in the Enyo Developer Guide.
 	*
@@ -14,22 +14,22 @@
 	*/
 	enyo.kind(
 		/** @lends  enyo.CardArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.CardArranger',
-		
+
 		/**
 		* @private
 		*/
 		kind: 'Arranger',
-		
+
 		/**
 		* @private
 		*/
 		layoutClass: 'enyo-arranger enyo-arranger-fit',
-		
+
 		/**
 		* @see {@link enyo.Arranger#calcArrangementDifference}
 		* @protected
@@ -37,7 +37,7 @@
 		calcArrangementDifference: function (i0, a0, i1, a1) {
 			return this.containerBounds.width;
 		},
-		
+
 		/**
 		* Opacifies the activating and deactivating panels. Expects the be passed ordered controls
 		* such that the first control in the array is the active panel.
@@ -51,7 +51,7 @@
 				this.arrangeControl(c, {opacity: v});
 			}
 		},
-		
+
 		/**
 		* Shows the active panel at the start of transition. Also triggers a resize on
 		* the active panel if it wasn't previously showing
@@ -73,10 +73,10 @@
 				}
 			};
 		}),
-		
+
 		/**
 		* Hides all non-active panels when the transition completes
-		* 
+		*
 		* @see {@link enyo.Arranger#finish}
 		* @method
 		* @protected
@@ -90,10 +90,10 @@
 				}
 			};
 		}),
-		
+
 		/**
 		* Ensures all panels are showing and visible when the arranger is destroyed
-		* 
+		*
 		* @method
 		* @private
 		*/

@@ -23,12 +23,12 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.DockRightArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.DockRightArranger',
-		
+
 		/**
 		* @private
 		*/
@@ -65,7 +65,7 @@
 		* @public
 		*/
 		layoutWidth: 0,
-		
+
 		/**
 		* @method
 		* @private
@@ -77,7 +77,7 @@
 				this.layoutWidth = this.container.layoutWidth != null ? this.container.layoutWidth : this.layoutWidth;
 			};
 		}),
-		
+
 		/**
 		* @see {@link enyo.Arranger#size}
 		* @protected
@@ -154,10 +154,10 @@
 
 			}
 		},
-		
+
 		/**
 		* Sets the `left` position each panel according to the `arrangement`
-		* 
+		*
 		* @see {@link enyo.Arranger#arrange}
 		* @protected
 		*/
@@ -171,7 +171,7 @@
 				this.arrangeControl(c, {left: xPos});
 			}
 		},
-		
+
 		/**
 		* Calculates the difference in width between the panels at `i0` and `i1`
 		*
@@ -183,7 +183,7 @@
 			var w = (i0 < i1) ? p[i1].width : p[i0].width;
 			return w;
 		},
-		
+
 		/**
 		* Resets the position of the panels
 		*
