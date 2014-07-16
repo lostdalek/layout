@@ -320,7 +320,8 @@
     * @extends enyo.FittableLayout
     * @public
     */
-    enyo.kind({
+    enyo.kind(
+        /** @lends enyo.FittableRowsLayout.prototype */ {
 
         /**
         * @private
