@@ -1,28 +1,112 @@
 /**
- * Flex Layout
- * Supports Webkit, Mozilla, IE8+
- * @author Lex Podgorny <lex.podgorny@lge.com>
- */
+* Flex Layout
+* Supports Webkit, Mozilla, IE8+
+*
+* @ui
+* @class enyo.FlexLayout
+* @extends enyo.Layout
+* @private
+*/
 
-enyo.kind({
+enyo.kind(/** @lends  enyo.FlexLayout.prototype */ {
+
+    /**
+    * @private
+    */
 	name           : 'enyo.FlexLayout',
+
+    /**
+    * @private
+    */
 	kind           : 'Layout',
+
+    /**
+    * Determines CSS class used for layout
+    *
+    * @type {String}
+    * @default  'enyo-content-layout'
+    * @public
+    */
 	layoutClass    : 'enyo-flex-layout',
+
+    /**
+    * Determines the spacing between children inside the flex container
+    *
+    * @type {Number}
+    * @default  0
+    * @public
+    */
 	flexSpacing    : 0,
+
+    /**
+    * Determines the orientation of the flex
+    *
+    * @type {String}
+    * @default  null
+    * @public
+    */
 	flexBias       : null,
+
+    /**
+    * Determines CSS class used for layout
+    *
+    * @type {String}
+    * @default  'enyo-content-layout'
+    * @public
+    */
 	flexStretch    : null,
 
+    /**
+    * defaultSpacing to use for children
+    *
+    * @type {String}
+    * @default  0
+    * @public
+    */
 	defaultSpacing : 0,
+
+    /**
+    * Determines default dimensions for children
+    *
+    * @type {String}
+    * @default  'enyo-content-layout'
+    * @public
+    */
 	defaultFlex    : 10,
+
+    /**
+    * Determines default bias for children
+    *
+    * @type {String}
+    * @default  'row'
+    * @public
+    */
 	defaultBias    : 'row',
+
+    /**
+    * Determines default strech action for children
+    *
+    * @type {Boolean}
+    * @default  true
+    * @public
+    */
 	defaultStretch : true,
 
-	/******************** PRIVATE *********************/
-
+    /**
+    * @private
+    */
 	_nReflow            : 0,                          // Reflow counter
+
+    /**
+    * @private
+    */
 	_nResponseCondition : 0,
 
-	// Predicate function. Returns true if oControl has FlexLayout
+    /**
+	* Predicate function. Returns true if oControl has FlexLayout
+    * @method
+    * @private
+    */
 	_hasFlexLayout: function(oControl) {
 		return (
 			oControl.layout &&
@@ -30,7 +114,11 @@ enyo.kind({
 		);
 	},
 
-	// Returns flex value assigned to oControl
+    /**
+	* Returns flex value assigned to oControl
+    * @method
+    * @private
+    */
 	_getFlex: function(oControl) {
 		var nFit = this._getFit(oControl);
 		if (nFit) { return nFit; }
@@ -43,7 +131,11 @@ enyo.kind({
 		return oControl.flex;
 	},
 
-	// Returns fit value assigned to oControl
+    /**
+	* Returns flex value assigned to oControl
+    * @method
+    * @private
+    */
 	_getFit: function(oControl) {
 		if (typeof oControl.fit == 'undefined' || oControl.fit === false) {
 			return 0;
@@ -54,7 +146,11 @@ enyo.kind({
 		return oControl.fit;
 	},
 
-	// Returns spacing value assigned to container of this layout
+    /**
+	* Returns spacing value assigned to container of this layout
+    * @method
+    * @private
+    */
 	_getSpacing: function() {
 		if (typeof this.container.flexSpacing == 'undefined' || this.container.flexSpacing === false) {
 			return this.defaultSpacing;
@@ -62,6 +158,11 @@ enyo.kind({
 		return parseInt(this.container.flexSpacing, 10);
 	},
 
+    /**
+	* Returns strech value assigned to container of this layout
+    * @method
+    * @private
+    */
 	_getStretch: function() {
 		if (typeof this.container.noStretch != 'undefined') {
 			return !this.container.noStretch;
@@ -72,6 +173,11 @@ enyo.kind({
 		return !!this.container.flexStretch;
 	},
 
+    /**
+	* Returns strech bias value assigned to container of this layout
+    * @method
+    * @private
+    */
 	_getBias: function() {
 		if (typeof this.container.flexBias == 'undefined' || !this.container.flexBias) {
 			return this.defaultBias;
@@ -79,7 +185,11 @@ enyo.kind({
 		return this.container.flexBias;
 	},
 
-	// Predicate function. Returns true if oControl.flexOrient is "column"
+    /**
+	* Predicate function. Returns true if oControl.flexOrient is "column"
+    * @method
+    * @private
+    */
 	_isColumn: function(oControl) {
 		if (typeof oControl.flexOrient == 'undefined' || oControl.flexOrient != 'column' && oControl.flexOrient != 'row') {
 			return this.flexBias == 'column';
@@ -87,9 +197,14 @@ enyo.kind({
 		return oControl.flexOrient == 'column';
 	},
 
-	// Returns 0 if container width has NOT crossed flexResponseWidth
-	// Otherwise returns 1 if flexResponseWidth has been crossed while increasing width,
-	// and -1 while decreasing
+    /**
+	* Returns 0 if container width has NOT crossed flexResponseWidth
+    * Otherwise returns 1 if flexResponseWidth has been crossed while increasing width,
+    * and -1 while decreasing
+    *
+    * @method
+    * @private
+    */
 	_getResponseFlag: function(oBounds) {
 		var nResponseWidth        = this.container.flexResponseWidth,
 			nNewResponseCondition = 0;
@@ -113,7 +228,12 @@ enyo.kind({
 		return 0;
 	},
 
-	// Returns response strategy kind object as specified in oControl.flexResponse, otherwise null
+    /**
+	* Returns response strategy kind object as specified in oControl.flexResponse, otherwise null
+    *
+    * @method
+    * @private
+    */
 	_getResponseStrategy: function(oControl) {
 		if (typeof oControl.flexResponse != 'undefined') {
 			if (typeof enyo.FlexLayout.ResponseStrategy[oControl.flexResponse] != 'undefined') {
@@ -123,7 +243,12 @@ enyo.kind({
 		return null;
 	},
 
-	// Walks children and triggers their response strategies if specified
+    /**
+	* Walks children and triggers their response strategies if specified
+    *
+    * @method
+    * @private
+    */
 	_setResponseValues: function(oBounds) {
 		var oControl,
 			oStrategy,
@@ -142,8 +267,13 @@ enyo.kind({
 		}
 	},
 
-	// Renders values set to aMetrics arrray by collectMetrics()
-	// Calculates and renders coordinates of children
+    /**
+	* Renders values set to aMetrics arrray by collectMetrics()
+	* Calculates and renders coordinates of children
+    *
+    * @method
+    * @private
+    */
 	_renderMetrics: function(aMetrics, oStylesContainer) {
 		var n            = 0,
 			nX           = 0,
@@ -204,9 +334,15 @@ enyo.kind({
 		}
 	},
 
-	// Makes a pass through children and gathers their sizes
-	// Calculates sizes of flexible controls in row/column groups
-	// Sets values to metrics array for subsequent rendering
+
+    /**
+    * Makes a pass through children and gathers their sizes
+	* Calculates sizes of flexible controls in row/column groups
+	* Sets values to metrics array for subsequent rendering
+    *
+    * @method
+    * @private
+    */
 	_collectMetrics: function(aChildren, oBounds) {
 		var oThis            = this,
 			oControl,
@@ -342,8 +478,13 @@ enyo.kind({
 		return aMetrics;
 	},
 
-	// Returns clone array of children that have been ordered accordingly
-	// to their flexOrder
+    /**
+	* Returns clone array of children that have been ordered accordingly
+	* to their flexOrder
+    *
+    * @method
+    * @private
+    */
 	_getOrderedChildren: function() {
 		var n = 0,
 			oControl,
@@ -363,8 +504,13 @@ enyo.kind({
 		return aChildren;
 	},
 
-	// Applies enyo.ContentLayout to children that are designated
-	// with flex:"content"
+    /**
+	* Applies enyo.ContentLayout to children that are designated
+	* with flex:"content"
+    *
+    * @method
+    * @private
+    */
 	_applyContentLayouts: function() {
 		var n = 0,
 			oControl;
@@ -377,17 +523,26 @@ enyo.kind({
 		}
 	},
 
-	// Runs once and initializes all that needs to be initialized
-	// Calls function that applies enyo.ContentLayout to children
+    /**
+	* Runs once and initializes all that needs to be initialized
+	* Calls function that applies enyo.ContentLayout to children
+    *
+    * @method
+    * @private
+    */
 	_initialize : function(oStylesContainer) {
 		if (this._nReflow > 0) { return; }
 		this._nReflow = 1;
 		this._applyContentLayouts();
 	},
 
-	/******************** PUBLIC *********************/
-
-	// Main reflow function, re-renders sizes and positions of children
+    /**
+    * Updates the layout to reflect any changes made to the layout container or
+    * the contained components.
+    *
+    * @method
+    * @public
+    */
 	reflow: enyo.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
@@ -420,20 +575,74 @@ enyo.kind({
 	})
 });
 
-enyo.kind({
+/**
+* Horizontal Flex Layout
+* Supports Webkit, Mozilla, IE8+
+*
+* @ui
+* @class enyo.HFlexLayout
+* @extends enyo.FlexLayout
+* @private
+*/
+
+enyo.kind(/** @lends  enyo.HFlexLayout.prototype */ {
 	name        : 'enyo.HFlexLayout',
 	kind        : 'enyo.FlexLayout',
 	defaultBias : 'column'
 });
 
-enyo.kind({
+/**
+* Vertical Flex Layout
+* Supports Webkit, Mozilla, IE8+
+*
+* @ui
+* @class enyo.VFlexLayout
+* @extends enyo.FlexLayout
+* @private
+*/
+
+enyo.kind(/** @lends  enyo.VFlexLayout.prototype */ {
+
+    /**
+    * @private
+    */
 	name        : 'enyo.VFlexLayout',
+
+    /**
+    * @private
+    */
 	kind        : 'enyo.FlexLayout',
+
+    /**
+    * @private
+    */
 	defaultBias : 'row'
 });
 
-enyo.kind({
+
+/**
+* Flex Layout
+* Supports Webkit, Mozilla, IE8+
+*
+* @ui
+* @class enyo.FlexBox
+* @extends enyo.Control
+* @private
+*/
+enyo.kind(/** @lends  enyo.FlexBox.prototype */ {
+
+    /**
+    * @private
+    */
 	name        : 'enyo.FlexBox',
+
+    /**
+    * @private
+    */
 	kind        : enyo.Control,
+
+    /**
+    * @private
+    */
 	layoutKind  : 'FlexLayout'
 });

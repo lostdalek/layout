@@ -42,7 +42,7 @@
 	* @type {Object}
 	* @public
 	*/
-	
+
 	/**
 	* _enyo.Slideable_ is a control that may be dragged either horizontally or
 	* vertically between a minimum and a maximum value. When released from
@@ -80,7 +80,7 @@
 	*/
 	enyo.kind(
 		/** @lends  enyo.Slideable.prototype */ {
-		
+
 		/**
 		* @private
 		*/
@@ -98,16 +98,16 @@
 		published: {
 			/**
 			* Direction of sliding; valid values are 'h' for horizonal or 'v' for vertical
-			* 
+			*
 			* @type {String}
 			* @default 'h'
 			* @public
 			*/
 			axis: 'h',
-			
+
 			/**
 			* Current position of the Slideable (a value between _min_ and _max_)
-			* 
+			*
 			* @type {Number}
 			* @default  0
 			* @public
@@ -150,7 +150,7 @@
 			* @public
 			*/
 			accelerated: 'auto',
-			
+
 			/**
 			* Set to false to prevent the Slideable from dragging with elasticity past
 			* its _min_ or _max_ value
@@ -181,7 +181,7 @@
 
 		/**
 		* Set to true to prevent a drag from bubbling beyond the Slideable
-		* 
+		*
 		* @private
 		*/
 		preventDragPropagation: false,
@@ -201,22 +201,22 @@
 			ondrag: 'drag',
 			ondragfinish: 'dragfinish'
 		},
-		
+
 		/**
 		* @private
 		*/
 		kDragScalar: 1,
-		
+
 		/**
 		* @private
 		*/
 		dragEventProp: 'dx',
-		
+
 		/**
 		* @private
 		*/
 		unitModifier: false,
-		
+
 		/**
 		* @private
 		*/
@@ -224,39 +224,39 @@
 
 		/**
 		* Determines which property of the drag event is used to position the control
-		* 
+		*
 		* @private
 		*/
 		dragMoveProp: 'dx',
-		
+
 		/**
 		* Determines which property of the drag event is used to allow dragging
-		* 
+		*
 		* @private
 		*/
 		shouldDragProp: 'horizontal',
-		
+
 		/**
 		* If {@link enyo.Slideable#canTransform}, the transform property to modify
-		* 
+		*
 		* @private
 		*/
 		transform: 'translateX',
-		
+
 		/**
 		* The dimension attribute to modify, either height or width
-		* 
+		*
 		* @private
 		*/
 		dimension: 'width',
-		
+
 		/**
 		* The position attribute to modify, either top or left
-		* 
+		*
 		* @private
 		*/
 		boundary: 'left',
-		
+
 		/**
 		* @method
 		* @private
@@ -271,7 +271,7 @@
 				this.addClass('enyo-slideable');
 			};
 		}),
-		
+
 		/**
 		* @method
 		* @private
@@ -282,7 +282,7 @@
 				sup.apply(this, arguments);
 			};
 		}),
-		
+
 		/**
 		* @method
 		* @private
@@ -294,7 +294,7 @@
 				this.updateDragScalar();
 			};
 		}),
-		
+
 		/**
 		* @method
 		* @private
@@ -305,12 +305,12 @@
 				this.updateDragScalar();
 			};
 		}),
-		
+
 		/**
-		* If transforms can't be used and inline style is using 'px' while 
+		* If transforms can't be used and inline style is using 'px' while
 		* {@link enyo.Slideable#unit} is '%', {@link enyo.Slideable#unitModifier} is set to the
 		* current value of {@link enyo.Slideable#dimension}
-		* 
+		*
 		* @private
 		*/
 		canModifyUnit: function () {
@@ -323,7 +323,7 @@
 				}
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -336,7 +336,7 @@
 			}
 			return '0';
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -347,7 +347,7 @@
 
 			this.setInlineStyles(inValue, inDimensions);
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -361,14 +361,14 @@
 				}
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
 		transformChanged: function () {
 			this.canTransform = enyo.dom.canTransform();
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -377,7 +377,7 @@
 				enyo.dom.accelerate(this, this.accelerated);
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -389,7 +389,7 @@
 			this.dimension = h ? 'width' : 'height';
 			this.boundary = h ? 'left' : 'top';
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -409,7 +409,7 @@
 				this.setBounds(inBounds, this.unit);
 			}
 		},
-		
+
 		/**
 		* @fires enyo.Slideable#event:onChange
 		* @private
@@ -440,42 +440,42 @@
 			}
 			this.doChange();
 		},
-		
+
 		/**
 		* @private
 		*/
 		getAnimator: function () {
 			return this.$.animator;
 		},
-		
+
 		/**
 		* @private
 		*/
 		isAtMin: function () {
 			return this.value &lt;= this.calcMin();
 		},
-		
+
 		/**
 		* @private
 		*/
 		isAtMax: function () {
 			return this.value >= this.calcMax();
 		},
-		
+
 		/**
 		* @private
 		*/
 		calcMin: function () {
 			return this.min;
 		},
-		
+
 		/**
 		* @private
 		*/
 		calcMax: function () {
 			return this.max;
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -484,14 +484,14 @@
 			var max = this.calcMax();
 			return Math.max(min, Math.min(inValue, max));
 		},
-		
+
 		/**
 		* @private
 		*/
 		dampValue: function (inValue) {
 			return this.dampBound(this.dampBound(inValue, this.min, 1), this.max, -1);
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -502,12 +502,12 @@
 			}
 			return v;
 		},
-		
+
 		/**
 		* Calculates the pixel value for the `percent` of `dimension`
 		*
 		* @param  {Number} percent
-		* @param  {Number} dimension 
+		* @param  {Number} dimension
 		*
 		* @return {Number}
 		* @private
@@ -515,7 +515,7 @@
 		percentToPixels: function (percent, dimension) {
 			return Math.floor((dimension / 100) * percent);
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -523,24 +523,24 @@
 			var boundary = this.unitModifier ? this.getBounds()[this.dimension] : this.container.getBounds()[this.dimension];
 			return (value / boundary) * 100;
 		},
-		
+
 		/**
 		* @private
 		*/
 		shouldDrag: function (inEvent) {
 			return this.draggable &amp;&amp; inEvent[this.shouldDragProp];
 		},
-		
+
 		/**
 		* Determines if `value` is out of bounds (e.g. greater than {@link enyo.Slideable#max} or
 		* less than {@link enyo.Slideable#min})
-		* 
+		*
 		* @private
 		*/
 		isOob: function (inValue) {
 			return inValue > this.calcMax() || inValue &lt; this.calcMin();
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -555,11 +555,11 @@
 				return this.preventDragPropagation;
 			}
 		},
-		
+
 		/**
 		* Updates {@link enyo.Slideable#value} during a drag and determines the direction of the
 		* drag
-		* 
+		*
 		* @private
 		*/
 		drag: function (inSender, inEvent) {
@@ -576,7 +576,7 @@
 				return this.preventDragPropagation;
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -588,11 +588,11 @@
 				return this.preventDragPropagation;
 			}
 		},
-		
+
 		/**
 		* Animates the control to either the min or max value when dragging completes based on the
 		* direction of the drag (determined in {@link enyo.Slideable#drag})
-		* 
+		*
 		* @private
 		*/
 		completeDrag: function (event) {
@@ -600,14 +600,14 @@
 				this.animateToMinMax(event.dragInfo.minimizing);
 			}
 		},
-		
+
 		/**
 		* @private
 		*/
 		isAnimating: function () {
 			return this.$.animator.isAnimating();
 		},
-		
+
 		/**
 		* @private
 		*/
@@ -661,17 +661,17 @@
 				this.animateToMax();
 			}
 		},
-		
+
 		/**
 		* Updates {@link enyo.Slideable#value} during animation
-		* 
+		*
 		* @private
 		*/
 		animatorStep: function (sender) {
 			this.setValue(sender.value);
 			return true;
 		},
-		
+
 		/**
 		* @fires enyo.Slideable#event:onAnimateFinish
 		* @private
@@ -702,13 +702,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="enyo.Arranger.html">Arranger</a></li><li><a href="enyo.CardArranger.html">CardArranger</a></li><li><a href="enyo.CardSlideInArranger.html">CardSlideInArranger</a></li><li><a href="enyo.CarouselArranger.html">CarouselArranger</a></li><li><a href="enyo.CollapsingArranger.html">CollapsingArranger</a></li><li><a href="enyo.ContextualLayout.html">ContextualLayout</a></li><li><a href="enyo.DockRightArranger.html">DockRightArranger</a></li><li><a href="enyo.FittableColumns.html">FittableColumns</a></li><li><a href="enyo.FittableColumnsLayout.html">FittableColumnsLayout</a></li><li><a href="enyo.FittableHeaderLayout.html">FittableHeaderLayout</a></li><li><a href="enyo.FittableLayout.html">FittableLayout</a></li><li><a href="enyo.FittableRows.html">FittableRows</a></li><li><a href="enyo.FittableRowsLayout.html">FittableRowsLayout</a></li><li><a href="enyo.LeftRightArranger.html">LeftRightArranger</a></li><li><a href="enyo.Node.html">Node</a></li><li><a href="enyo.Panels.html">Panels</a></li><li><a href="enyo.Slideable.html">Slideable</a></li><li><a href="enyo.SpiralArranger.html">SpiralArranger</a></li><li><a href="enyo.TopButtonArranger.html">TopButtonArranger</a></li></ul><h3>Events</h3><ul><li><a href="enyo.List.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.List.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.List.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.List.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.List.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.List.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.Node.html#event:event:onDestroyed">event:onDestroyed</a></li><li><a href="enyo.Node.html#event:event:onExpand">event:onExpand</a></li><li><a href="enyo.Node.html#event:event:onNodeDblClick">event:onNodeDblClick</a></li><li><a href="enyo.Node.html#event:event:onNodeTap">event:onNodeTap</a></li><li><a href="enyo.Panels.html#event:event:onTransitionFinish">event:onTransitionFinish</a></li><li><a href="enyo.Panels.html#event:event:onTransitionStart">event:onTransitionStart</a></li><li><a href="enyo.Slideable.html#event:event:onAnimateFinish">event:onAnimateFinish</a></li><li><a href="enyo.Slideable.html#event:event:onChange">event:onChange</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animate">animate</a></li><li><a href="global.html#cleanupMemory">cleanupMemory</a></li><li><a href="global.html#defaultScale">defaultScale</a></li><li><a href="global.html#fitLayoutClass">fitLayoutClass</a></li><li><a href="global.html#horizontalDragPropagation">horizontalDragPropagation</a></li><li><a href="global.html#lowMemory">lowMemory</a></li><li><a href="global.html#orient">orient</a></li><li><a href="global.html#thumb">thumb</a></li><li><a href="global.html#touchOverscroll">touchOverscroll</a></li><li><a href="global.html#verticalDragPropagation">verticalDragPropagation</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="enyo.AlphaJumper.html">AlphaJumper</a></li><li><a href="enyo.AlphaJumpList.html">AlphaJumpList</a></li><li><a href="enyo.AroundList.html">AroundList</a></li><li><a href="enyo.Arranger.html">Arranger</a></li><li><a href="enyo.CardArranger.html">CardArranger</a></li><li><a href="enyo.CardSlideInArranger.html">CardSlideInArranger</a></li><li><a href="enyo.CarouselArranger.html">CarouselArranger</a></li><li><a href="enyo.CollapsingArranger.html">CollapsingArranger</a></li><li><a href="enyo.ContextualLayout.html">ContextualLayout</a></li><li><a href="enyo.DockRightArranger.html">DockRightArranger</a></li><li><a href="enyo.FittableColumns.html">FittableColumns</a></li><li><a href="enyo.FittableColumnsLayout.html">FittableColumnsLayout</a></li><li><a href="enyo.FittableHeaderLayout.html">FittableHeaderLayout</a></li><li><a href="enyo.FittableLayout.html">FittableLayout</a></li><li><a href="enyo.FittableRows.html">FittableRows</a></li><li><a href="enyo.FittableRowsLayout.html">FittableRowsLayout</a></li><li><a href="enyo.FlyweightRepeater.html">FlyweightRepeater</a></li><li><a href="enyo.GridListImageItem.html">GridListImageItem</a></li><li><a href="enyo.LeftRightArranger.html">LeftRightArranger</a></li><li><a href="enyo.List.html">List</a></li><li><a href="enyo.Node.html">Node</a></li><li><a href="enyo.Panels.html">Panels</a></li><li><a href="enyo.PulldownList.html">PulldownList</a></li><li><a href="enyo.Puller.html">Puller</a></li><li><a href="enyo.Slideable.html">Slideable</a></li><li><a href="enyo.SpiralArranger.html">SpiralArranger</a></li><li><a href="enyo.TopButtonArranger.html">TopButtonArranger</a></li></ul><h3>Events</h3><ul><li><a href="enyo.AlphaJumper.html#event:event:onAlphaJump">event:onAlphaJump</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.AroundList.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.AroundList.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.AroundList.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.AroundList.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.AroundList.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.AroundList.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.AroundList.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.AroundList.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.FlyweightRepeater.html#event:event:onRenderRow">event:onRenderRow</a></li><li><a href="enyo.FlyweightRepeater.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.List.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.List.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.List.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.List.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.List.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.List.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.Node.html#event:event:onDestroyed">event:onDestroyed</a></li><li><a href="enyo.Node.html#event:event:onExpand">event:onExpand</a></li><li><a href="enyo.Node.html#event:event:onNodeDblClick">event:onNodeDblClick</a></li><li><a href="enyo.Node.html#event:event:onNodeTap">event:onNodeTap</a></li><li><a href="enyo.Panels.html#event:event:onTransitionFinish">event:onTransitionFinish</a></li><li><a href="enyo.Panels.html#event:event:onTransitionStart">event:onTransitionStart</a></li><li><a href="enyo.PulldownList.html#event:event:onPull">event:onPull</a></li><li><a href="enyo.PulldownList.html#event:event:onPullCancel">event:onPullCancel</a></li><li><a href="enyo.PulldownList.html#event:event:onPullComplete">event:onPullComplete</a></li><li><a href="enyo.PulldownList.html#event:event:onPullRelease">event:onPullRelease</a></li><li><a href="enyo.PulldownList.html#event:event:onPullStart">event:onPullStart</a></li><li><a href="enyo.PulldownList.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.PulldownList.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.PulldownList.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.PulldownList.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.PulldownList.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.PulldownList.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.PulldownList.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.PulldownList.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.Puller.html#event:event:onCreate">event:onCreate</a></li><li><a href="enyo.Slideable.html#event:event:onAnimateFinish">event:onAnimateFinish</a></li><li><a href="enyo.Slideable.html#event:event:onChange">event:onChange</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animate">animate</a></li><li><a href="global.html#cleanupMemory">cleanupMemory</a></li><li><a href="global.html#defaultScale">defaultScale</a></li><li><a href="global.html#horizontalDragPropagation">horizontalDragPropagation</a></li><li><a href="global.html#lowMemory">lowMemory</a></li><li><a href="global.html#thumb">thumb</a></li><li><a href="global.html#touchOverscroll">touchOverscroll</a></li><li><a href="global.html#verticalDragPropagation">verticalDragPropagation</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Tue Jul 15 2014 15:51:33 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Jul 16 2014 16:39:22 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>

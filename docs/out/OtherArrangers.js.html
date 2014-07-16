@@ -44,12 +44,12 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.LeftRightArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.LeftRightArranger',
-		
+
 		/**
 		* @private
 		*/
@@ -93,7 +93,7 @@
 		 * @protected
 		 */
 		axisPosition: 'left',
-		
+
 		/**
 		* @method
 		* @private
@@ -104,10 +104,10 @@
 				this.margin = this.container.margin != null ? this.container.margin : this.margin;
 			};
 		}),
-		
+
 		/**
 		* Sizes the panels such that they fill {@link enyo.LeftRightArranger#offAxisSize} and yield
-		* {@link enyo.LeftRightArranger#margin} pixels on each side of 
+		* {@link enyo.LeftRightArranger#margin} pixels on each side of
 		* {@link enyo.LeftRightArranger#axisSize}
 		*
 		* @see {@link enyo.Arranger#size}
@@ -124,12 +124,12 @@
 				c.setBounds(b);
 			}
 		},
-		
+
 		/**
 		* To prevent a panel that is switching sides (to maintain the balance) from overlapping the
 		* active panel during the animation, `size` updates the `z-index` of the switching panel
 		* to ensure it stays behind the other panels.
-		* 
+		*
 		* @todo Could use some optimization in its `for` loop (e.g. .length lookup and calc)
 		* @see {@link enyo.Arranger#start}
 		* @method
@@ -161,12 +161,12 @@
 				}
 			};
 		}),
-		
+
 		/**
 		* Balances the panels laid out to each side of the active panel
 		* such that for a set of `n` panels, `floor(n/2)` are before and `ceil(n/2)` are after
 		* the active panel.
-		* 
+		*
 		* @protected
 		*/
 		arrange: function (controls, arrangement) {
@@ -188,11 +188,11 @@
 				e += box;
 			}
 		},
-		
+
 		/**
 		* Calculates the difference along the {@link enyo.LeftRightArranger#axisPosition}
 		* (e.g. left)
-		* 
+		*
 		* @protected
 		*/
 		calcArrangementDifference: function (inI0, inA0, inI1, inA1) {
@@ -204,7 +204,7 @@
 			//enyo.log(inI0, inI1);
 			return inA0[i][this.axisPosition] - inA1[i][this.axisPosition];
 		},
-		
+
 		/**
 		* Resets positioning and opacity of panels
 		*
@@ -246,47 +246,47 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.TopBottomArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.TopBottomArranger',
-		
+
 		/**
 		* @private
 		*/
 		kind: 'LeftRightArranger',
-		
+
 		/**
 		* @see {@link enyo.Arranger#dragProp}
 		* @private
 		*/
 		dragProp: 'ddy',
-		
+
 		/**
 		* @see {@link enyo.Arranger#dragDirectionProp}
 		* @private
 		*/
 		dragDirectionProp: 'yDirection',
-		
+
 		/**
 		* @see {@link enyo.Arranger#canDragProp}
 		* @private
 		*/
 		canDragProp: 'vertical',
-		
+
 		/**
 		* @see {@link enyo.LeftRightArranger#axisSize}
 		* @protected
 		*/
 		axisSize: 'height',
-		
+
 		/**
 		* @see {@link enyo.LeftRightArranger#offAxisSize}
 		* @protected
 		*/
 		offAxisSize: 'width',
-		
+
 		/**
 		* @see {@link enyo.LeftRightArranger#axisPosition}
 		* @protected
@@ -311,30 +311,30 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.SpiralArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.SpiralArranger',
-		
+
 		/**
 		* @private
 		*/
 		kind: 'Arranger',
-		
+
 		/**
 		* @see {@link enyo.Arranger#incrementalPoints}
 		* @private
 		*/
 		incrementalPoints: true,
-		
+
 		/**
 		* The amount of space between successive controls
-		* 
+		*
 		* @private
 		*/
 		inc: 20,
-		
+
 		/**
 		* Each panel is sized to one third of the container
 		*
@@ -350,10 +350,10 @@
 				c.setBounds({width: w, height: h});
 			}
 		},
-		
+
 		/**
 		* Panels are arranged in a spiral with the active panel at center
-		* 
+		*
 		* @see {@link enyo.Arranger#arrange}
 		* @protected
 		*/
@@ -365,10 +365,10 @@
 				this.arrangeControl(c, {left: x, top: y});
 			}
 		},
-		
+
 		/**
 		* Applies descending `z-indez` for each panel starting with the active panel
-		* 
+		*
 		* @see {@link enyo.Arranger#start}
 		* @method
 		* @protected
@@ -382,7 +382,7 @@
 				}
 			};
 		}),
-		
+
 		/**
 		* @see {@link enyo.Arranger#calcArrangementDifference}
 		* @protected
@@ -390,7 +390,7 @@
 		calcArrangementDifference: function (inI0, inA0, inI1, inA1) {
 			return this.controlWidth;
 		},
-		
+
 		/**
 		* Resets position and z-index of panels
 		*
@@ -428,17 +428,17 @@
 	*/
 	enyo.kind(
 		/** @lends enyo.GridArranger.prototype */ {
-		
+
 		/**
 		* @private
 		*/
 		name: 'enyo.GridArranger',
-		
+
 		/**
 		* @private
 		*/
 		kind: 'Arranger',
-		
+
 		/**
 		* @see {@link enyo.Arranger#incrementalPoints}
 		* @private
@@ -462,9 +462,9 @@
 		 * @public
 		 */
 		colHeight: 100,
-		
+
 		/**
-		* Sizes each panel to be {@link enyo.GridArranger#colWidth} pixels wide and 
+		* Sizes each panel to be {@link enyo.GridArranger#colWidth} pixels wide and
 		* {@link enyo.GridArranger#colHeight} pixels high.
 		*
 		* @see {@link enyo.Arranger#size}
@@ -477,12 +477,12 @@
 				c.setBounds({width: w, height: h});
 			}
 		},
-		
+
 		/**
 		* Calculates the number of columns based on the containers width and
 		* {@link enyo.GridArranger#colWidth} and positions each by row starting at the top left of
 		* the container.
-		* 
+		*
 		* @see {@link enyo.Arranger#arrange}
 		* @protected
 		*/
@@ -496,7 +496,7 @@
 				}
 			}
 		},
-		
+
 		/**
 		* If the control is moving between rows, adjust its opacity during the transition
 		*
@@ -510,7 +510,7 @@
 				enyo.Arranger.opacifyControl(inControl, inA.top % this.colHeight !== 0 ? 0.25 : 1);
 			};
 		}),
-		
+
 		/**
 		* @see {@link enyo.Arranger#calcArrangementDifference}
 		* @protected
@@ -518,7 +518,7 @@
 		calcArrangementDifference: function (inI0, inA0, inI1, inA1) {
 			return this.colWidth;
 		},
-		
+
 		/**
 		* Resets position of panels
 		*
@@ -550,13 +550,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="enyo.Arranger.html">Arranger</a></li><li><a href="enyo.CardArranger.html">CardArranger</a></li><li><a href="enyo.CardSlideInArranger.html">CardSlideInArranger</a></li><li><a href="enyo.CarouselArranger.html">CarouselArranger</a></li><li><a href="enyo.CollapsingArranger.html">CollapsingArranger</a></li><li><a href="enyo.ContextualLayout.html">ContextualLayout</a></li><li><a href="enyo.DockRightArranger.html">DockRightArranger</a></li><li><a href="enyo.FittableColumns.html">FittableColumns</a></li><li><a href="enyo.FittableColumnsLayout.html">FittableColumnsLayout</a></li><li><a href="enyo.FittableHeaderLayout.html">FittableHeaderLayout</a></li><li><a href="enyo.FittableLayout.html">FittableLayout</a></li><li><a href="enyo.FittableRows.html">FittableRows</a></li><li><a href="enyo.FittableRowsLayout.html">FittableRowsLayout</a></li><li><a href="enyo.LeftRightArranger.html">LeftRightArranger</a></li><li><a href="enyo.Node.html">Node</a></li><li><a href="enyo.Panels.html">Panels</a></li><li><a href="enyo.Slideable.html">Slideable</a></li><li><a href="enyo.SpiralArranger.html">SpiralArranger</a></li><li><a href="enyo.TopButtonArranger.html">TopButtonArranger</a></li></ul><h3>Events</h3><ul><li><a href="enyo.List.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.List.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.List.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.List.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.List.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.List.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.Node.html#event:event:onDestroyed">event:onDestroyed</a></li><li><a href="enyo.Node.html#event:event:onExpand">event:onExpand</a></li><li><a href="enyo.Node.html#event:event:onNodeDblClick">event:onNodeDblClick</a></li><li><a href="enyo.Node.html#event:event:onNodeTap">event:onNodeTap</a></li><li><a href="enyo.Panels.html#event:event:onTransitionFinish">event:onTransitionFinish</a></li><li><a href="enyo.Panels.html#event:event:onTransitionStart">event:onTransitionStart</a></li><li><a href="enyo.Slideable.html#event:event:onAnimateFinish">event:onAnimateFinish</a></li><li><a href="enyo.Slideable.html#event:event:onChange">event:onChange</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animate">animate</a></li><li><a href="global.html#cleanupMemory">cleanupMemory</a></li><li><a href="global.html#defaultScale">defaultScale</a></li><li><a href="global.html#fitLayoutClass">fitLayoutClass</a></li><li><a href="global.html#horizontalDragPropagation">horizontalDragPropagation</a></li><li><a href="global.html#lowMemory">lowMemory</a></li><li><a href="global.html#orient">orient</a></li><li><a href="global.html#thumb">thumb</a></li><li><a href="global.html#touchOverscroll">touchOverscroll</a></li><li><a href="global.html#verticalDragPropagation">verticalDragPropagation</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="enyo.AlphaJumper.html">AlphaJumper</a></li><li><a href="enyo.AlphaJumpList.html">AlphaJumpList</a></li><li><a href="enyo.AroundList.html">AroundList</a></li><li><a href="enyo.Arranger.html">Arranger</a></li><li><a href="enyo.CardArranger.html">CardArranger</a></li><li><a href="enyo.CardSlideInArranger.html">CardSlideInArranger</a></li><li><a href="enyo.CarouselArranger.html">CarouselArranger</a></li><li><a href="enyo.CollapsingArranger.html">CollapsingArranger</a></li><li><a href="enyo.ContextualLayout.html">ContextualLayout</a></li><li><a href="enyo.DockRightArranger.html">DockRightArranger</a></li><li><a href="enyo.FittableColumns.html">FittableColumns</a></li><li><a href="enyo.FittableColumnsLayout.html">FittableColumnsLayout</a></li><li><a href="enyo.FittableHeaderLayout.html">FittableHeaderLayout</a></li><li><a href="enyo.FittableLayout.html">FittableLayout</a></li><li><a href="enyo.FittableRows.html">FittableRows</a></li><li><a href="enyo.FittableRowsLayout.html">FittableRowsLayout</a></li><li><a href="enyo.FlyweightRepeater.html">FlyweightRepeater</a></li><li><a href="enyo.GridListImageItem.html">GridListImageItem</a></li><li><a href="enyo.LeftRightArranger.html">LeftRightArranger</a></li><li><a href="enyo.List.html">List</a></li><li><a href="enyo.Node.html">Node</a></li><li><a href="enyo.Panels.html">Panels</a></li><li><a href="enyo.PulldownList.html">PulldownList</a></li><li><a href="enyo.Puller.html">Puller</a></li><li><a href="enyo.Slideable.html">Slideable</a></li><li><a href="enyo.SpiralArranger.html">SpiralArranger</a></li><li><a href="enyo.TopButtonArranger.html">TopButtonArranger</a></li></ul><h3>Events</h3><ul><li><a href="enyo.AlphaJumper.html#event:event:onAlphaJump">event:onAlphaJump</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.AlphaJumpList.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.AroundList.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.AroundList.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.AroundList.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.AroundList.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.AroundList.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.AroundList.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.AroundList.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.AroundList.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.FlyweightRepeater.html#event:event:onRenderRow">event:onRenderRow</a></li><li><a href="enyo.FlyweightRepeater.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.List.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.List.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.List.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.List.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.List.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.List.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.List.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.Node.html#event:event:onDestroyed">event:onDestroyed</a></li><li><a href="enyo.Node.html#event:event:onExpand">event:onExpand</a></li><li><a href="enyo.Node.html#event:event:onNodeDblClick">event:onNodeDblClick</a></li><li><a href="enyo.Node.html#event:event:onNodeTap">event:onNodeTap</a></li><li><a href="enyo.Panels.html#event:event:onTransitionFinish">event:onTransitionFinish</a></li><li><a href="enyo.Panels.html#event:event:onTransitionStart">event:onTransitionStart</a></li><li><a href="enyo.PulldownList.html#event:event:onPull">event:onPull</a></li><li><a href="enyo.PulldownList.html#event:event:onPullCancel">event:onPullCancel</a></li><li><a href="enyo.PulldownList.html#event:event:onPullComplete">event:onPullComplete</a></li><li><a href="enyo.PulldownList.html#event:event:onPullRelease">event:onPullRelease</a></li><li><a href="enyo.PulldownList.html#event:event:onPullStart">event:onPullStart</a></li><li><a href="enyo.PulldownList.html#event:event:onReorder">event:onReorder</a></li><li><a href="enyo.PulldownList.html#event:event:onSetupItem">event:onSetupItem</a></li><li><a href="enyo.PulldownList.html#event:event:onSetupPinnedReorderComponents">event:onSetupPinnedReorderComponents</a></li><li><a href="enyo.PulldownList.html#event:event:onSetupReorderComponents">event:onSetupReorderComponents</a></li><li><a href="enyo.PulldownList.html#event:event:onSetupSwipeItem">event:onSetupSwipeItem</a></li><li><a href="enyo.PulldownList.html#event:event:onSwipe">event:onSwipe</a></li><li><a href="enyo.PulldownList.html#event:event:onSwipeComplete">event:onSwipeComplete</a></li><li><a href="enyo.PulldownList.html#event:event:onSwipeDrag">event:onSwipeDrag</a></li><li><a href="enyo.Puller.html#event:event:onCreate">event:onCreate</a></li><li><a href="enyo.Slideable.html#event:event:onAnimateFinish">event:onAnimateFinish</a></li><li><a href="enyo.Slideable.html#event:event:onChange">event:onChange</a></li></ul><h3>Global</h3><ul><li><a href="global.html#animate">animate</a></li><li><a href="global.html#cleanupMemory">cleanupMemory</a></li><li><a href="global.html#defaultScale">defaultScale</a></li><li><a href="global.html#horizontalDragPropagation">horizontalDragPropagation</a></li><li><a href="global.html#lowMemory">lowMemory</a></li><li><a href="global.html#thumb">thumb</a></li><li><a href="global.html#touchOverscroll">touchOverscroll</a></li><li><a href="global.html#verticalDragPropagation">verticalDragPropagation</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Tue Jul 15 2014 15:51:33 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Jul 16 2014 16:39:22 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>

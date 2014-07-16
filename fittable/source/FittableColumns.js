@@ -15,7 +15,7 @@
     * @public
     */
 
-    enyo.kind(/** @lends  enyo.FittableColumns.prototype */{
+    enyo.kind(/** @lends  enyo.FittableColumns.prototype */ {
 
         /**
         * @private

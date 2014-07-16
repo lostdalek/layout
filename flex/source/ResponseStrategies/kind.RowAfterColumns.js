@@ -1,10 +1,22 @@
 /**
- * enyo.FlexLayout.ResponseStrategy.RowAfterColumns kind definition
- * @author: Lex Podgorny
- */
+*
+* @ui
+* @class FlexLayout.ResponseStrategy.RowAfterColumns
+* @extends enyo.Control
+* @private
+*/
 
 enyo.FlexLayout.ResponseStrategy.RowAfterColumns = enyo.singleton({
+
+    /**
+    * @private
+    */
 	kind: 'enyo.FlexLayout.ResponseStrategy',
+
+    /**
+    * @private
+    * @method
+    */
 	_getPositionAfterColumns: function(oControl) {
 		var n         = 0,
 			bFound    = false,
@@ -22,6 +34,11 @@ enyo.FlexLayout.ResponseStrategy.RowAfterColumns = enyo.singleton({
 		}
 		return -1;
 	},
+
+    /**
+    * @private
+    * @method
+    */
 	respond: enyo.inherit(function(sup) {
 		return function(oControl, bIncreasing) {
 			sup.apply(this, arguments);

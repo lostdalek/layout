@@ -1,16 +1,27 @@
 /**
- * Layout Invalidator Mixin for IE
- * Triggers FlexLayout reflow whenever content or class is changed
- * @author Lex Podgorny <lex.podgorny@lge.com>
- */
-
+* Layout Invalidator Mixin for IE
+* Triggers FlexLayout reflow whenever content or class is changed
+*
+* @ui
+* @class enyo.LayoutInvalidator
+* @extends enyo.Control
+* @private
+*/
 enyo.LayoutInvalidator = {
+
+    /**
+    * @private
+    */
 	name: 'LayoutInvalidator',
 
 	handlers: {
 		onInvalidateLayout: 'onInvalidateLayout'
 	},
 
+    /**
+    * @method
+    * @private
+    */
 	onInvalidateLayout: function() {
 		if (!this.layoutKind) { return false; }
 		if (this.layout.kindName == 'enyo.ContentLayout') {
@@ -18,6 +29,11 @@ enyo.LayoutInvalidator = {
 		}
 	},
 
+
+    /**
+    * @method
+    * @private
+    */
 	rendered: enyo.inherit(function (sup) {
 		return function() {
 			sup.apply(this, arguments);
@@ -25,11 +41,19 @@ enyo.LayoutInvalidator = {
 		};
 	}),
 
+    /**
+    * @method
+    * @private
+    */
 	invalidateLayout: function() {
 		if (!this.hasNode()) { return; }
 		this.bubble('onInvalidateLayout', {}, this);
 	},
 
+    /**
+    * @method
+    * @private
+    */
 	contentChanged: enyo.inherit(function (sup) {
 		return function() {
 			sup.apply(this, arguments);
@@ -37,6 +61,11 @@ enyo.LayoutInvalidator = {
 		};
 	}),
 
+
+    /**
+    * @method
+    * @private
+    */
 	classesChanged: enyo.inherit(function (sup) {
 		return function() {
 			sup.apply(this, arguments);

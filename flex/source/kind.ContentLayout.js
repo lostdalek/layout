@@ -1,25 +1,84 @@
 /**
- * Content Layout
- * Provides a container with fixed widht and/or height that resizes to reveal it's content
- * Supports Webkit, Mozilla, IE8
- * @author Lex Podgorny <lex.podgorny@lge.com>
- */
+* Content Layout
+* Provides a container with fixed width and/or height that resizes to reveal it's content
+* Supports Webkit, Mozilla, IE8
+*
+* @ui
+* @class enyo.ContentLayout
+* @extends enyo.Layout
+* @private
+*/
 
-enyo.kind({
+enyo.kind(/** @lends  enyo.ContentLayout.prototype */ {
+
+    /**
+    * @private
+    */
 	name        : 'enyo.ContentLayout',
+
+    /**
+    * Determines CSS class used for layout
+    *
+    * @type {String}
+    * @default  'enyo-content-layout'
+    * @public
+    */
 	layoutClass : 'enyo-content-layout',
+
+    /**
+    * @private
+    */
 	kind        : 'Layout',
 
+    /**
+    * Determines minimum container width
+    *
+    * @type {Number}
+    * @default  'enyo-content-layout'
+    * @public
+    */
 	minWidth    : 0,
+
+    /**
+    * Determines minimum container height
+    *
+    * @type {Number}
+    * @default 0
+    * @public
+    */
 	minHeigh    : 0,
+
+    /**
+    * Determines maximum container width
+    *
+    * @type {Number}
+    * @default 0
+    * @public
+    */
 	maxWidth    : 0,
+
+    /**
+    * Determines maximum container Height
+    *
+    * @type {Number}
+    * @default 0
+    * @public
+    */
 	maxHeight   : 0,
 
-	/************** PRIVATE **************/
-
+    /**
+    * @private
+    */
 	_width      : 0,
+    /**
+    * @private
+    */
 	_height     : 0,
 
+    /**
+    * @private
+    * @method
+    */
 	_updateBoundValues: function() {
 		if (this._isFlexChild()) {
 			if (this._isFlexColumn()) {
@@ -39,14 +98,26 @@ enyo.kind({
 		}
 	},
 
+    /**
+    * @private
+    * @method
+    */
 	_isFlexChild: function() {
 		return this.container.parent.layoutKind == 'enyo.FlexLayout';
 	},
 
+    /**
+    * @private
+    * @method
+    */
 	_isFlexColumn: function() {
 		return this.container.parent.layout._isColumn(this.container);
 	},
 
+    /**
+    * @private
+    * @method
+    */
 	_setSize: function(nWidth, nHeight, oStyles) {
 		var bReflow = this._width != nWidth || this._height != nHeight;
 
@@ -72,6 +143,10 @@ enyo.kind({
 		}
 	},
 
+    /**
+    * @private
+    * @method
+    */
 	_updateSize: function() {
 		this._updateBoundValues();
 
@@ -132,14 +207,26 @@ enyo.kind({
 		this._setSize(nWidth, nHeight, oStyles);
 	},
 
-	/************** PUBLIC **************/
-
+    /**
+    * Assigns any static layout properties not dependent on changes to the
+    * rendered component or contaner sizes, etc.
+    *
+    * @method
+    * @public
+    */
 	flow: enyo.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
 		};
 	}),
 
+    /**
+    * Updates the layout to reflect any changes made to the layout container or
+    * the contained components.
+    *
+    * @method
+    * @public
+    */
 	reflow : enyo.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);

@@ -1,11 +1,17 @@
 /**
- * enyo.FlexLayout.ResponseStrategy kind definition
- * @author: Lex Podgorny
- */
+* @ui
+* @class enyo.FlexLayout.ResponseStrategy
+* @extends enyo.Control
+* @private
+*/
 
 enyo.kind({
 	name: 'enyo.FlexLayout.ResponseStrategy',
 
+    /**
+    * @private
+    * @method
+    */
 	setProperty: function(oControl, sProperty, mValue) {
 		if (sProperty == 'flexOrient') {
 			enyo.Styles.setStyles(oControl, {width: 'auto', height: 'auto'});
@@ -22,6 +28,10 @@ enyo.kind({
 		}
 	},
 
+    /**
+    * @private
+    * @method
+    */
 	reverseProperty: function(oControl, sProperty) {
 		if (sProperty == 'flexOrient') {
 			enyo.Styles.setStyles(oControl, {width: 'auto', height: 'auto'});
@@ -42,5 +52,9 @@ enyo.kind({
 		}
 	},
 
+    /**
+    * @private
+    * @method
+    */
 	respond: function() {}
 });
