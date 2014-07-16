@@ -146,6 +146,7 @@
 		},
 
 		/**
+		* @fires enyo.AlphaJumper#event:onAlphaJump
 		* @private
 		*/
 		markerChanged: function(last) {
