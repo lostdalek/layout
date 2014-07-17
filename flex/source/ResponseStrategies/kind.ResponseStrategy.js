@@ -1,60 +1,64 @@
-/**
-* @ui
-* @class enyo.FlexLayout.ResponseStrategy
-* @extends enyo.Control
-* @private
-*/
-
-enyo.kind({
-	name: 'enyo.FlexLayout.ResponseStrategy',
+(function (enyo, scope) {
 
     /**
+    * @ui
+    * @class enyo.FlexLayout.ResponseStrategy
+    * @extends enyo.Control
     * @private
-    * @method
     */
-	setProperty: function(oControl, sProperty, mValue) {
-		if (sProperty == 'flexOrient') {
-			enyo.Styles.setStyles(oControl, {width: 'auto', height: 'auto'});
-		}
 
-		oControl['__' + sProperty] = (typeof oControl[sProperty] == 'undefined'
-			? null
-			: oControl[sProperty]
-		);
-		oControl[sProperty] = mValue;
+    enyo.kind({
+        name: 'enyo.FlexLayout.ResponseStrategy',
 
-		if (oControl.layout) {
-			oControl.layout.reflow();
-		}
-	},
+        /**
+        * @private
+        * @method
+        */
+        setProperty: function(oControl, sProperty, mValue) {
+            if (sProperty == 'flexOrient') {
+                enyo.Styles.setStyles(oControl, {width: 'auto', height: 'auto'});
+            }
 
-    /**
-    * @private
-    * @method
-    */
-	reverseProperty: function(oControl, sProperty) {
-		if (sProperty == 'flexOrient') {
-			enyo.Styles.setStyles(oControl, {width: 'auto', height: 'auto'});
-		}
+            oControl['__' + sProperty] = (typeof oControl[sProperty] == 'undefined'
+                ? null
+                : oControl[sProperty]
+            );
+            oControl[sProperty] = mValue;
 
-		var sTempProperty = '__' + sProperty;
-		if (typeof oControl[sTempProperty] != 'undefined') {
-			if (oControl[sTempProperty] !== null) {
-				oControl[sProperty] = oControl[sTempProperty];
-			} else {
-				delete oControl[sProperty];
-			}
-			delete oControl[sTempProperty];
-		}
+            if (oControl.layout) {
+                oControl.layout.reflow();
+            }
+        },
 
-		if (oControl.layout) {
-			oControl.layout.reflow();
-		}
-	},
+        /**
+        * @private
+        * @method
+        */
+        reverseProperty: function(oControl, sProperty) {
+            if (sProperty == 'flexOrient') {
+                enyo.Styles.setStyles(oControl, {width: 'auto', height: 'auto'});
+            }
 
-    /**
-    * @private
-    * @method
-    */
-	respond: function() {}
-});
+            var sTempProperty = '__' + sProperty;
+            if (typeof oControl[sTempProperty] != 'undefined') {
+                if (oControl[sTempProperty] !== null) {
+                    oControl[sProperty] = oControl[sTempProperty];
+                } else {
+                    delete oControl[sProperty];
+                }
+                delete oControl[sTempProperty];
+            }
+
+            if (oControl.layout) {
+                oControl.layout.reflow();
+            }
+        },
+
+        /**
+        * @private
+        * @method
+        */
+        respond: function() {}
+    });
+
+})(enyo, this);
