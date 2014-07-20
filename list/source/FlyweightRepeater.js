@@ -364,7 +364,7 @@
 		*/
 		fetchRowNode: function (index) {
 			if (this.hasNode()) {
-				return this.node.querySelector('[data-enyo-index=' + index + ']');
+				return this.node.querySelector('[data-enyo-index="' + index + '"]');
 			}
 		},
 
