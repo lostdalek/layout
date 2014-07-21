@@ -68,7 +68,6 @@
         /**
         * Adjusts the popup position, as well as the nub location and direction.
         *
-        * @method
         * @type {Boolean}
         * @default  true
         * @public
@@ -175,7 +174,6 @@
         /**
         * Move the popup below or above the activator & verify that it fits on screen
         *
-        * @method
         * @type {Boolean}
         * @default  true
         * @public
@@ -214,7 +212,6 @@
         },
 
         /**
-        * @method
         * @type {Boolean}
         * @default  true
         * @public
@@ -258,7 +255,6 @@
         },
 
         /**
-        * @method
         * @type {Boolean}
         * @default  false
         * @param  {String} leftFlushPt - Left side cut off
@@ -305,7 +301,6 @@
         /**
         * Move the popup left or right of the activator & verify that it fits on screen
         *
-        * @method
         * @type {Boolean}
         * @default  true
         * @public
@@ -346,7 +341,6 @@
         },
 
         /**
-        * @method
         * @type {Boolean}
         * @default  true
         * @public
@@ -389,7 +383,6 @@
 
 
         /**
-        * @method
         * @type {Boolean}
         * @default  false
         * @param  {String} leftFlushPt - Left side cut off
@@ -441,7 +434,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @param  {String} inNode - DOM Node to retrieve bounding rectangle
         * @private

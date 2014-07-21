@@ -12,7 +12,6 @@
     enyo.mixin(enyo.easing, /** @lends  enyo.easing.prototype */ {
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -21,7 +20,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -31,7 +29,6 @@
 
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -42,7 +39,6 @@
 
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -51,7 +47,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -60,7 +55,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -70,7 +64,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -79,7 +72,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -88,7 +80,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -98,7 +89,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -107,7 +97,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -116,7 +105,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -126,7 +114,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -135,7 +122,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -144,7 +130,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -153,7 +138,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -162,7 +146,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -171,7 +154,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -183,7 +165,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -192,7 +173,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -201,7 +181,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -211,7 +190,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -228,7 +206,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -245,7 +222,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -263,7 +239,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -273,7 +248,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -283,7 +257,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -294,7 +267,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -303,7 +275,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */
@@ -320,7 +291,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @public
         */

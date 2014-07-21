@@ -73,7 +73,6 @@
         }),
 
         /**
-		* @method
 		* @private
 		*/
         calcFitIndex: function() {
@@ -90,7 +89,6 @@
         },
 
         /**
-		* @method
 		* @private
 		*/
         getFitControl: function() {
@@ -105,7 +103,6 @@
         },
 
         /**
-		* @method
 		* @private
 		*/
         shouldReverse: function() {
@@ -113,7 +110,6 @@
         },
 
         /**
-		* @method
 		* @private
 		*/
         getFirstChild: function() {
@@ -127,7 +123,6 @@
         },
 
         /**
-		* @method
 		* @private
 		*/
         getLastChild: function() {
@@ -141,7 +136,6 @@
         },
 
         /**
-		* @method
 		* @private
 		*/
         getShowingChildren: function() {
@@ -160,7 +154,6 @@
         },
 
         /**
-		* @method
 		* @private
 		*/
         _reflow: function(sMeasureName, sClienMeasure, sAttrBefore, sAttrAfter) {
@@ -221,8 +214,7 @@
         /**
         * Assigns any static layout properties not dependent on changes to the
         * rendered component or contaner sizes, etc.
-        *
-        * @method
+        * 
         * @public
         */
         flow: function() {
@@ -244,7 +236,6 @@
         * Updates the layout to reflect any changes made to the layout container or
         * the contained components.
         *
-        * @method
         * @public
         */
         reflow: function() {
