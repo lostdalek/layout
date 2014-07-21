@@ -455,7 +455,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @private
         */
@@ -464,7 +463,6 @@
         },
 
         /**
-        * @method
         * @type {Number}
         * @private
         */
@@ -473,7 +471,6 @@
         },
 
         /**
-        * @method
         * @param  {String} inRect - DOM Node to retrieve bounding rectangle
         * @private
         */
@@ -486,7 +483,6 @@
         },
 
         /**
-        * @method
         * @private
         */
         resetPositioning: function() {
@@ -504,8 +500,7 @@
             this.applyPosition({top: 'auto'});
         },
 
-        /**
-        * @method
+        /**s
         * @private
         */
         reflow: function() {
