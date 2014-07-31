@@ -1,5 +1,5 @@
 enyo.depends(
 	"arrangers",
-	"Panels.css",
+	//"Panels.css",
 	"Panels.js"
 );

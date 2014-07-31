@@ -1,6 +1,6 @@
 enyo.depends(
 	"Arranger.js",
-	"Arranger.css",
+	//"Arranger.css",
 	"CardArranger.js",
 	"CardSlideInArranger.js",
 	"CarouselArranger.js",
